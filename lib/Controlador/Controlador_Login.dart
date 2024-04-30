@@ -42,14 +42,14 @@ class ControladorLogin {
     return false;
   }
 
-    getTipoUsuario(String email) async {
+  Future<int> getTipoUsuario(String email) async {
     List<Usuario> usuarios = await getUsuariosFromFirebase();
     for (var usuario in usuarios) {
       if (usuario.nombre == email) {
         print(usuario.tipoUsuario);
-        if (usuario.tipoUsuario == 'Vigilante') {
+        if (usuario.tipoUsuario == 'Almacenista') {
           return 1;
-        } else if (usuario.tipoUsuario == 'Almacenista') {
+        } else if (usuario.tipoUsuario == 'Vigilante') {
           return 2;
         }
       }

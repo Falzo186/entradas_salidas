@@ -8,7 +8,7 @@ class Controlador_RegistrarUsuario {
   final CollectionReference _usuariosCollection =
       FirebaseFirestore.instance.collection('Usuarios');
 
-   registrarUsuario(Usuario usuario) async {
+  Future<bool> registrarUsuario(Usuario usuario) async {
     final querySnapshot = await _usuariosCollection
         .where('nombre', isEqualTo: usuario.nombre)
         .get();

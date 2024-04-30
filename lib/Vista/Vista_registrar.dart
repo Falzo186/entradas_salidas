@@ -345,35 +345,37 @@ Widget build(BuildContext context) {
                                   alignment: Alignment.center,
                                   child: SizedBox(
                                     child: ElevatedButton(
-                                      onPressed: () {
-                                        bool registrado = _controlador.registrarUsuario(Usuario(
-                                          nombre: matricula,
-                                          contrasena: contrasena,
-                                          matricula: matricula,
-                                          tipoUsuario: tipoUsuario ?? '', // Usar el valor seleccionado o cadena vacía si es nulo
-                                          esAdmin: false,
-                                        )) as bool;
-                                        if (registrado) {
-                                          showDialog(
-                                            context: context,
-                                            builder: (context) => AlertDialog(
-                                              title: const Text('Usuario Registrado'),
-                                              content: Text(
-                                                  'Nombre: $matricula\nContraseña: $contrasena\nTipo de Usuario: $tipoUsuario'),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: const Text('Cerrar'),
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        } else {
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                              const SnackBar(content: Text('El usuario ya existe')));
-                                        }
+                                      onPressed: ()  async {
+                                        bool registrado = await _controlador.registrarUsuario(Usuario(
+  nombre: matricula,
+  contrasena: contrasena,
+  matricula: matricula,
+  tipoUsuario: tipoUsuario ?? '', // Usar el valor seleccionado o cadena vacía si es nulo
+  esAdmin: false,
+));
+
+if (registrado) {
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: const Text('Usuario Registrado'),
+      content: Text(
+        'Nombre: $matricula\nContraseña: $contrasena\nTipo de Usuario: $tipoUsuario'),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text('Cerrar'),
+        ),
+      ],
+    ),
+  );
+} else {
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(content: Text('El usuario ya existe')));
+}
+
                                       },
                                       style: ElevatedButton.styleFrom(
                                         foregroundColor: Colors.white,

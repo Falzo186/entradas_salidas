@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "684980547065",
+    "project_id": "entradas-4350a",
+    "storage_bucket": "entradas-4350a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:684980547065:android:c4f60ae9626e4880362128",
+        "android_client_info": {
+          "package_name": "com.example.entradas_salidas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7typACDYdqSAUJjUYg_7YM6QgaLCi7xo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

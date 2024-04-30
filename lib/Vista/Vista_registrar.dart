@@ -17,7 +17,7 @@ class _RegistroUsuariosState extends State<RegistroUsuarios> {
   String adminNombre = 'admin';
   String adminContrasena = 'admin123';
   bool adminValido = false;
-  Controlaodr_RegistrarUsuario _controlador = Controlaodr_RegistrarUsuario();
+  Controlador_RegistrarUsuario _controlador = Controlador_RegistrarUsuario();
 
 
 Widget build(BuildContext context) {
@@ -352,7 +352,7 @@ Widget build(BuildContext context) {
                                           matricula: matricula,
                                           tipoUsuario: tipoUsuario ?? '', // Usar el valor seleccionado o cadena vacía si es nulo
                                           esAdmin: false,
-                                        ));
+                                        )) as bool;
                                         if (registrado) {
                                           showDialog(
                                             context: context,

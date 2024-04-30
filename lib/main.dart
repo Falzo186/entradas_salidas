@@ -1,25 +1,21 @@
 import 'dart:async';
-
 import 'package:entradas_salidas/Controlador/Controlador_Login.dart';
 import 'package:flutter/material.dart';
 import 'package:entradas_salidas/Vista/Vista_registrar.dart';
 import 'Vista/Vista_MenuAlmacen.dart';
 import 'Vista/Vista_MenuVigilante.dart';
-import 'package:hive/hive.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 
-
-void main() async {
-  Hive.init('hive_database');
-  await Hive.openBox('Camiones');
-  await Hive.openBox('EntradasCamiones');
-  await Hive.openBox('SalidasCamiones');
-  await Hive.openBox('HistorialCamiones');
-  await Hive.openBox('Usuarios');
-  await Hive.openBox('Operadores');
-  await Hive.openBox('Agenda');
-  runApp(MyApp());
+void main() async{
+  
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp( const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -198,21 +194,23 @@ Widget build(BuildContext context) {
                     children: [
                       Container(
                         child: ElevatedButton(
-                          onPressed: () {
-                          if (controlador.login(_email, _password)){
-                            if(controlador.getTipoUsuario(_email) == 1){
-                              Navigator.of(context, rootNavigator: true).push(
-                                MaterialPageRoute(
-                                  builder: (context) => const Inicio(),
-                                ),
-                              );
-                          }else {
-                            Navigator.of(context, rootNavigator: true).push(
-                              MaterialPageRoute(
-                                builder: (context) => const  AlmacenesMenu(),
-                              ),
-                            );
-                          }
+                          onPressed: () async {
+                          if (await controlador.login(_email, _password)){
+                            print(controlador.getTipoUsuario(_email));
+                          //   if(controlador.getTipoUsuario(_email) == 1){
+                          //     print(controlador.getTipoUsuario(_email));
+                          //     Navigator.of(context, rootNavigator: true).push(
+                          //       MaterialPageRoute(
+                          //         builder: (context) => const Inicio(),
+                          //       ),
+                          //     );
+                          // }else {
+                          //   Navigator.of(context, rootNavigator: true).push(
+                          //     MaterialPageRoute(
+                          //       builder: (context) => const  AlmacenesMenu(),
+                          //     ),
+                          //   );
+                          // }
                           }
                           },
                           style: ButtonStyle(

@@ -5,8 +5,6 @@ class Camion {
   int anoFabricacion;
   String companiaTransporte;
   bool enTransito;
-  bool enEspera;
-  bool enMantenimiento;
   int kilometraje;
   String ultimoServicio;
   String proximoServicio;
@@ -18,11 +16,23 @@ class Camion {
     required this.anoFabricacion,
     required this.companiaTransporte,
     this.enTransito = false,
-    this.enEspera = false,
-    this.enMantenimiento = false,
     required this.kilometraje,
     required this.ultimoServicio,
     required this.proximoServicio,
     required this.historialCargas,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'matricula': matricula,
+      'modelo': modelo,
+      'anoFabricacion': anoFabricacion,
+      'companiaTransporte': companiaTransporte,
+      'enTransito': enTransito,
+      'kilometraje': kilometraje,
+      'ultimoServicio': ultimoServicio,
+      'proximoServicio': proximoServicio,
+      'historialCargas': historialCargas,
+    };
+  }
 }

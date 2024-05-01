@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:entradas_salidas/Controlador/Controlador_Login.dart';
+import 'package:entradas_salidas/Controlador/Controlador_camiones.dart';
 import 'package:flutter/material.dart';
 import 'package:entradas_salidas/Vista/Vista_registrar.dart';
 import 'Vista/Vista_MenuAlmacen.dart';
@@ -142,6 +143,8 @@ class _LoginPageState extends State<LoginPage> {
   String _email = '';
   String _password = '';
   ControladorLogin controlador = ControladorLogin();
+  ControladorCamiones controladorCamiones = ControladorCamiones();
+  
 
   @override
 Widget build(BuildContext context) {

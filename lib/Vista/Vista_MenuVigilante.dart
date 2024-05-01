@@ -1,3 +1,5 @@
+import 'package:entradas_salidas/Controlador/Controlador_camiones.dart';
+import 'package:entradas_salidas/Modelo/Camion.dart';
 import 'package:entradas_salidas/Vista/HistoryScreen.dart';
 import 'package:entradas_salidas/Vista/Vista_Agenda.dart';
 import 'package:entradas_salidas/Vista/Vista_Camion.dart';
@@ -13,6 +15,22 @@ class AlmacenesMenu extends StatefulWidget {
 }
 
 class _AlmacenesMenuState extends State<AlmacenesMenu> {
+  ControladorCamiones controladorCamiones = ControladorCamiones();
+  List<Camion> camiones = [];
+
+  @override
+ void initState() {
+  super.initState();
+  _cargarCamiones();
+}
+
+Future<void> _cargarCamiones() async {
+  List<Camion> listaCamiones = await controladorCamiones.getCamionesDeBD();
+  setState(() {
+    camiones = listaCamiones;
+  });
+}
+
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -163,7 +181,7 @@ class _AlmacenesMenuState extends State<AlmacenesMenu> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>  VistaCamion()),
+                      MaterialPageRoute(builder: (context) =>   VistaCamion()),
                     );
                   },
                 ),

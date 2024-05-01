@@ -1,3 +1,4 @@
+import 'package:entradas_salidas/Controlador/Controlador_camiones.dart';
 import 'package:entradas_salidas/Modelo/Camion.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,7 @@ class AltaCamionView extends StatefulWidget {
 }
 
 class _AltaCamionViewState extends State<AltaCamionView> {
+  ControladorCamiones _controlador = ControladorCamiones();
   final TextEditingController _matriculaController = TextEditingController();
   final TextEditingController _modeloController = TextEditingController();
   final TextEditingController _anoController = TextEditingController();
@@ -16,6 +18,8 @@ class _AltaCamionViewState extends State<AltaCamionView> {
   final TextEditingController _kilometrajeController = TextEditingController();
   DateTime _ultimoServicio = DateTime.now();
   DateTime _proximoServicio = DateTime.now();
+  String ultimoServicio = '';
+  String proximoServicio = '';
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +84,28 @@ class _AltaCamionViewState extends State<AltaCamionView> {
             ),
             const SizedBox(height: 20.0),
             ElevatedButton(
-              onPressed: _guardarCamion,
+              onPressed: () async {
+                Camion camion = Camion(
+                  matricula: _matriculaController.text,
+                  modelo: _modeloController.text,
+                  anoFabricacion: int.parse(_anoController.text),
+                  companiaTransporte: _companiaController.text,
+                  kilometraje: int.parse(_kilometrajeController.text),
+                  ultimoServicio: _formatDate(_ultimoServicio),
+                  proximoServicio: _formatDate(_proximoServicio),
+                  historialCargas: int.parse(_matriculaController.text),
+                );
+                bool registrado = await _controlador.registrarCamion(camion);
+                // if (registrado) {
+                //   Navigator.pop(context);
+                // } else {
+                //   ScaffoldMessenger.of(context).showSnackBar(
+                //     const SnackBar(
+                //       content: Text('Ya existe un camión con esa matrícula'),
+                //     ),
+                //   );
+                // }
+              },
               child: const Text('Guardar Camión'),
             ),
           ],
@@ -103,19 +128,5 @@ class _AltaCamionViewState extends State<AltaCamionView> {
     return '${date.day}/${date.month}/${date.year}';
   }
 
-  void _guardarCamion() {
-    
-    // Camion camion = Camion(
-    //   // matricula: _matriculaController.text,
-    //   // modelo: _modeloController.text,
-    //   // anoFabricacion: int.parse(_anoController.text),
-    //   // companiaTransporte: _companiaController.text,
-    //   // kilometraje: int.parse(_kilometrajeController.text),
-    //   // ultimoServicio: _ultimoServicio,
-    //   // proximoServicio: _proximoServicio,
-    //   // historialCargas:  _matriculaController.text,
-    // );
-
-   
-  }
+  
 }

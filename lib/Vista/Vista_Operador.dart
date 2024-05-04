@@ -1,39 +1,34 @@
+import 'package:entradas_salidas/Controlador/Controlador_Operador.dart';
+import 'package:entradas_salidas/Vista/Vista_AltaOperadores.dart';
 import 'package:flutter/material.dart';
 import 'package:entradas_salidas/Vista/Vista_DetallesOperador.dart';
 import '../Modelo/Operador.dart';
 
-class VistaOperador extends StatelessWidget {
+class VistaOperador extends StatefulWidget {
   
-  final List<Operador> _operadores = [
-    Operador(
-      IdChofer: '1234-ABC',
-      nombre: 'Juan Pérez',
-      licenciaConducir: '123456789',
-      contacto: '555-1234',
-      experiencia: 5,
-      historialViajes: ['Viaje 1', 'Viaje 2'],
-      calificaciones: ['Buena', 'Regular'],
-      estadoSalud: 'Bueno',
-      documentosIdentificacion: ['DNI 1234567', 'Pasaporte ABC123'],
-      certificadosCapacitacion: ['Certificado 1', 'Certificado 2'],
-      registroInfracciones: ['Infracción 1', 'Infracción 2'],
-    ),
-    Operador(
-      IdChofer: '5678-DEF',
-      nombre: 'María Rodríguez',
-      licenciaConducir: '987654321',
-      contacto: '555-5678',
-      experiencia: 8,
-      historialViajes: ['Viaje 3', 'Viaje 4'],
-      calificaciones: ['Buena', 'Muy buena'],
-      estadoSalud: 'Excelente',
-      documentosIdentificacion: ['DNI 7654321', 'Pasaporte DEF567'],
-      certificadosCapacitacion: ['Certificado 3', 'Certificado 4'],
-      registroInfracciones: ['Infracción 3', 'Infracción 4'],
-    ),
-  ];
 
    VistaOperador({super.key});
+
+  @override
+  State<VistaOperador> createState() => _VistaOperadorState();
+}
+
+class _VistaOperadorState extends State<VistaOperador> {
+   List<Operador> _operadores = [];
+  final ControladorOperador controlador = ControladorOperador();
+
+  @override
+   void initState() {
+  super.initState();
+  cargarOperadores();
+}
+
+Future<void> cargarOperadores() async {
+  List<Operador> listaOperadores = await controlador.getOperadoresDeBD();
+  setState(() {
+    _operadores = listaOperadores;
+  });
+}
 
   @override
  Widget build(BuildContext context) {
@@ -44,7 +39,10 @@ class VistaOperador extends StatelessWidget {
         IconButton(
           icon: Icon(Icons.add),
           onPressed: () {
-            // Aquí puedes agregar la lógica para agregar un operador
+           Navigator.push(
+       context,
+       MaterialPageRoute(builder: (context) => VistaAltasOperadores()) ) ;
+       
           },
         ),
       ],

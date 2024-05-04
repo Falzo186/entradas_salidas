@@ -5,16 +5,14 @@ import 'package:entradas_salidas/Vista/Vista_Agenda.dart';
 import 'package:entradas_salidas/Vista/Vista_Camion.dart';
 import 'package:entradas_salidas/Vista/Vista_Operador.dart';
 import 'package:flutter/material.dart';
-import 'package:entradas_salidas/data/data.dart';
-
-class AlmacenesMenu extends StatefulWidget {
-  const AlmacenesMenu({Key? key}) : super(key: key);
+class MenuVigilante extends StatefulWidget {
+  MenuVigilante({Key? key}) : super(key: key);
 
   @override
-  State<AlmacenesMenu> createState() => _AlmacenesMenuState();
+  State<MenuVigilante> createState() => _MenuVigilanteState();
 }
 
-class _AlmacenesMenuState extends State<AlmacenesMenu> {
+class _MenuVigilanteState extends State<MenuVigilante> {
   ControladorCamiones controladorCamiones = ControladorCamiones();
   List<Camion> camiones = [];
 
@@ -32,7 +30,7 @@ Future<void> _cargarCamiones() async {
 }
 
   @override
-  Widget build(BuildContext context) {
+Widget build(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
         appBarTheme: const AppBarTheme(
@@ -181,7 +179,7 @@ Future<void> _cargarCamiones() async {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>   VistaCamion()),
+                      MaterialPageRoute(builder: (context) =>  VistaCamion()),
                     );
                   },
                 ),
@@ -216,7 +214,7 @@ Future<void> _cargarCamiones() async {
                   onPressed: () {
                     Navigator.push(
                     context,
-                  MaterialPageRoute(builder: (context) => HistoryScreen(historyEntries: Data.historyEntries)), // Pasa historyEntries de Data
+                  MaterialPageRoute(builder: (context) => HistoryScreen()), // Pasa historyEntries de Data
                     );
                   },
                 ),

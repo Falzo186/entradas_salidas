@@ -1,11 +1,18 @@
+import 'package:entradas_salidas/Modelo/HistortialEntradas.dart';
 import 'package:flutter/material.dart';
-import 'package:entradas_salidas/Modelo/history_entry.dart';
 
 
-class HistoryScreen extends StatelessWidget {
-  final List<HistoryEntry> historyEntries;
+class HistoryScreen extends StatefulWidget {
+  
 
-  const HistoryScreen({Key? key, required this.historyEntries}) : super(key: key);
+    HistoryScreen({Key? key, });
+
+  @override
+  State<HistoryScreen> createState() => _HistoryScreenState();
+}
+
+class _HistoryScreenState extends State<HistoryScreen> {
+late  List<HistorialEntradas> historial;
 
   @override
   Widget build(BuildContext context) {
@@ -14,15 +21,15 @@ class HistoryScreen extends StatelessWidget {
         title: const Text('Historial'),
       ),
       body: ListView.builder(
-        itemCount: historyEntries.length,
+        itemCount: historial.length,
         itemBuilder: (context, index) {
-          final entry = historyEntries[index];
+          final entry = historial[index];
           Color tileColor = Colors.white; // Por defecto
           
           // colores según el tipo de entrada
-          if (entry.type == 'Entrada') {
+          if (entry.tipo == 'Entrada') {
             tileColor = Colors.green;
-          } else if (entry.type == 'Salida') {
+          } else if (entry.tipo == 'Salida') {
             tileColor = Colors.orange;
           }
 
@@ -30,7 +37,7 @@ class HistoryScreen extends StatelessWidget {
             margin: const EdgeInsets.symmetric(vertical: 8.0), 
             child: ListTile(
               title: Text(
-                '${entry.type} - ${entry.dateTime}',
+                '${entry.tipo} - ${entry.hora}',
                 style: const TextStyle(color: Colors.white), // Cambiar el color del texto a blanco
               ),
               tileColor: tileColor, // el color de fondo
@@ -38,8 +45,8 @@ class HistoryScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 4.0), // espacio entre los elementos
-                  Text('Chofer: ${entry.driverName}'),
-                  Text('ID del camión: ${entry.truckId}'),
+                  Text('Chofer: ${entry.operador}'),
+                  Text('ID del camión: ${entry.matriculaCamion}'),
                 ],
               ),
             ),

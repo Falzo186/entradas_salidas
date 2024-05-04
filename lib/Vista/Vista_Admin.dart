@@ -35,7 +35,7 @@ class _VistaAdminState extends State<VistaAdmin> {
                 // Acción para el botón "Vigilante"
                  Navigator.of(context, rootNavigator: true).push(
                               MaterialPageRoute(
-                                builder: (context) => const  AlmacenesMenu(),
+                                builder: (context) => MenuVigilante(),
                               ),
                             );
                

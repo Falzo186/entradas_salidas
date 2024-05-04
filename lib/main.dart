@@ -10,12 +10,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 
-void main() async{
-  
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Asegurar la inicialización de Flutter
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp( const MyApp());
+  runApp(const MyApp());
 }
 
 
@@ -209,7 +209,7 @@ Widget build(BuildContext context) {
                           }else if (await controlador.getTipoUsuario(_email) == 2) {
                             Navigator.of(context, rootNavigator: true).push(
                               MaterialPageRoute(
-                                builder: (context) => const  AlmacenesMenu(),
+                                builder: (context) => MenuVigilante(),
                               ),
                             );
                           }else if (await controlador.getTipoUsuario(_email) == 3) {

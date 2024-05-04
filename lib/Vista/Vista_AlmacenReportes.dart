@@ -1,12 +1,12 @@
 
 import 'package:flutter/material.dart';
 
-class Bitacora extends StatefulWidget {
+class VistaReportes extends StatefulWidget {
  @override
  _BitacoraState createState() => _BitacoraState();
 }
 
-class _BitacoraState extends State<Bitacora> {
+class _BitacoraState extends State<VistaReportes> {
  @override
  Widget build(BuildContext context) {
     return Scaffold(

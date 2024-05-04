@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:entradas_salidas/Controlador/Controlador_Login.dart';
 import 'package:entradas_salidas/Controlador/Controlador_camiones.dart';
+import 'package:entradas_salidas/Vista/Vista_Admin.dart';
 import 'package:flutter/material.dart';
 import 'package:entradas_salidas/Vista/Vista_registrar.dart';
 import 'Vista/Vista_MenuAlmacen.dart';
@@ -205,14 +206,19 @@ Widget build(BuildContext context) {
                                   builder: (context) => const Inicio(),
                                 ),
                               );
-                          }else {
+                          }else if (await controlador.getTipoUsuario(_email) == 2) {
                             Navigator.of(context, rootNavigator: true).push(
                               MaterialPageRoute(
                                 builder: (context) => const  AlmacenesMenu(),
                               ),
                             );
-                          }
-                          }
+                          }else if (await controlador.getTipoUsuario(_email) == 3) {
+                            Navigator.of(context, rootNavigator: true).push(
+                              MaterialPageRoute(
+                                builder: (context) => VistaAdmin(),
+                              ),
+                            );
+                          }}
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(Colors.transparent),

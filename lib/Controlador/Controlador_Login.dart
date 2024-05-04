@@ -1,11 +1,8 @@
 
 import 'package:entradas_salidas/Modelo/Usuario.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ControladorLogin {
-  CollectionReference _usuariosCollection =
-      FirebaseFirestore.instance.collection('Usuarios');
 
   Future<List<Usuario>> getUsuariosFromFirebase() async {
     List<Usuario> usuarios = [];
@@ -22,39 +19,39 @@ class ControladorLogin {
     return usuarios;
   }
 
-  Future<bool> login(String email, String password) async {
-    List<Usuario> usuarios = await getUsuariosFromFirebase();
-    for (var usuario in usuarios) {
-      if (usuario.nombre == email && usuario.contrasena == password) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  Future<bool> isAdmin(String email) async {
-    List<Usuario> usuarios = await getUsuariosFromFirebase();
-    for (var usuario in usuarios) {
-      if (usuario.nombre == email && usuario.esAdmin) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  Future<int> getTipoUsuario(String email) async {
-    List<Usuario> usuarios = await getUsuariosFromFirebase();
-    for (var usuario in usuarios) {
-      if (usuario.nombre == email) {
-        print(usuario.tipoUsuario);
-        if (usuario.tipoUsuario == 'Almacenista') {
-          return 1;
-        } else if (usuario.tipoUsuario == 'Vigilante') {
-          return 2;
-        }
-      }
-    }
-    return 0; // No se encontró el usuario
-  }
+  final CollectionReference _usuariosCollection =FirebaseFirestore.instance.collection('Usuarios');
+      
+ Future<bool> login(String email, String password) async {
+  QuerySnapshot querySnapshot = await _usuariosCollection
+      .where('nombre', isEqualTo: email)
+      .where('contrasena', isEqualTo: password)
+      .get();
+  return querySnapshot.docs.isNotEmpty;
 }
 
+Future<bool> isAdmin(String email) async {
+  QuerySnapshot querySnapshot = await _usuariosCollection
+      .where('nombre', isEqualTo: email)
+      .where('esAdmin', isEqualTo: true)
+      .get();
+  return querySnapshot.docs.isNotEmpty;
+}
+
+Future<int> getTipoUsuario(String email) async {
+  QuerySnapshot querySnapshot =
+      await _usuariosCollection.where('nombre', isEqualTo: email).get();
+  if (querySnapshot.docs.isNotEmpty) {
+    var usuario = querySnapshot.docs.first;
+    switch (usuario['tipoUsuario']) {
+      case 'Almacenista':
+        return 1;
+      case 'Vigilante':
+        return 2;
+      case 'Admin':
+        return 3;
+    }
+  }
+  return 0; // No se encontró el usuario
+}
+
+}

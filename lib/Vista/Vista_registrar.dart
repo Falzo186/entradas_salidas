@@ -1,3 +1,4 @@
+import 'package:entradas_salidas/Controlador/Controlador_Login.dart';
 import 'package:entradas_salidas/Controlador/Controlador_RegistrarUsuario.dart';
 import 'package:flutter/material.dart';
 import 'package:entradas_salidas/Modelo/Usuario.dart';
@@ -15,9 +16,8 @@ class _RegistroUsuariosState extends State<RegistroUsuarios> {
   String matricula = '';
   String? tipoUsuario; // Cambiado a String nulable
   bool esAdmin = false;
-  String adminNombre = 'admin';
-  String adminContrasena = 'admin123';
   bool adminValido = false;
+  ControladorLogin _controladorLogin = ControladorLogin();
   final Controlador_RegistrarUsuario _controlador = Controlador_RegistrarUsuario();
 
   Widget build(BuildContext context) {
@@ -175,17 +175,21 @@ class _RegistroUsuariosState extends State<RegistroUsuarios> {
                         Align(
                           alignment: Alignment.center,
                           child: ElevatedButton(
-                            onPressed: () {
-                              if (nombre == adminNombre &&
-                                  contrasena == adminContrasena) {
-                                setState(() {
-                                  adminValido = true;
-                                });
-                              } else {
-                                setState(() {
-                                  adminValido = false;
-                                });
-                              }
+                            onPressed: () async {
+                             if(await _controladorLogin.login(nombre, contrasena)){
+                               if(await _controladorLogin.isAdmin(nombre)){
+                                 setState(() {
+                                     adminValido = true;
+                                 });
+                               }else{
+                                  setState(() {
+                                      adminValido = false;
+                                  });
+                               }
+
+                             }else{
+                               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Usuario o contraseña incorrectos del administrador')));
+                             }
                             },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white,

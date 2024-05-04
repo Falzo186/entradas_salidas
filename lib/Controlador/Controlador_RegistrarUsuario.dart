@@ -19,5 +19,6 @@ class Controlador_RegistrarUsuario {
     await _usuariosCollection.add(usuario.toMap());
     return true;
   }
+  
 
 }

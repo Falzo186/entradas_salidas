@@ -4,26 +4,37 @@ import 'package:entradas_salidas/Modelo/InfraccionOperador.dart';
 
 class ControladorHistorialOperador{
     
-    final CollectionReference RegistroInFraccionesOperado =FirebaseFirestore.instance.collection('RegistroInFraccionesOperador');
-  final CollectionReference HistorialOperado = FirebaseFirestore.instance.collection('HistorialOperador');   
+    final CollectionReference Infracciones =FirebaseFirestore.instance.collection('RegistroInFraccionesOperador');
+  final CollectionReference Historial = FirebaseFirestore.instance.collection('HistorialOperador');   
  
 Future<List<InfraccionOperador>> getRegistroInFraccionesOperador(String idChofer) async {
   List<InfraccionOperador> registroInfracciones = [];
-  final querySnapshot = await RegistroInFraccionesOperado
-      .where('idchofer', isEqualTo: idChofer)
+  final querySnapshot = await Infracciones
+      .where('idChofer', isEqualTo: idChofer)
       .get();
   for (var doc in querySnapshot.docs) {
     registroInfracciones.add(InfraccionOperador(
-      idChofer: doc['idchofer'],
+      idChofer: doc['idChofer'],
       Infraccion: doc['Infraccion'],
     ));
   }
   return registroInfracciones;
 }
+Future<void> agregarInfraccionAlcoholico() async {
+  String idChofer = '1'; // ID del chofer al que se le agregará la infracción
+  String infraccion = 'Conducir bajo los efectos del alcohol'; // Tipo de infracción
+
+  // Agregar la infracción a la colección de infracciones
+  await Infracciones.add({
+    'idChofer': idChofer,
+    'Infraccion': infraccion,
+  });
+}
+
 
 Future<List<HistorialOperador>> getHistorialOperador(String idChofer) async {
   List<HistorialOperador> historialOperador = [];
-  final querySnapshot = await HistorialOperado
+  final querySnapshot = await Historial
       .where('idChofer', isEqualTo: idChofer)
       .get();
   for (var doc in querySnapshot.docs) {

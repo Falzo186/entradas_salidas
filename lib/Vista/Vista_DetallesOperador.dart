@@ -22,23 +22,17 @@ class _DetalleOperadorState extends State<DetalleOperador> {
      @override
    void initState() {
   super.initState();
-  cargarRegistrosInfraccionesOperador();
   cargarHistorialOperador();
+ 
 }
 Future<void> cargarHistorialOperador() async {
   List<HistorialOperador> listaHistorialOperador = await controladorHistorial.getHistorialOperador(widget.operador.IdChofer);
-  setState(() {
-    historialOperador = listaHistorialOperador;
-  });
-}
-
-Future<void> cargarRegistrosInfraccionesOperador() async {
   List<InfraccionOperador> listaInfracciones = await controladorHistorial.getRegistroInFraccionesOperador(widget.operador.IdChofer);
   setState(() {
+    historialOperador = listaHistorialOperador;
     registroInfracciones = listaInfracciones;
   });
 }
-
 
   @override
     Widget build(BuildContext context) {

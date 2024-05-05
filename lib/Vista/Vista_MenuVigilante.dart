@@ -49,11 +49,11 @@ Widget build(BuildContext context) {
               Container(
                 height: MediaQuery.of(context).size.height * 0.25,
                 decoration: const BoxDecoration(color: Color.fromARGB(255, 41, 39, 39)),
-                child: Column(
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(top: 15.0, left: 30.0),
                       child: Text(
                         'Bienvenido',
@@ -62,20 +62,7 @@ Widget build(BuildContext context) {
                     ),
                     Row(
                       children: [
-                        const Padding(padding: EdgeInsets.only(left: 30.0)),
-                        const Text(
-                          'Buscar',
-                          style: TextStyle(color: Colors.white, fontSize: 25),
-                        ),
-                        Expanded(child: Container()),
-                        SizedBox(
-                          height: 100,
-                          child: IconButton(
-                            icon: const Icon(Icons.search, size: 25),
-                            color: Colors.white,
-                            onPressed: () {},
-                          ),
-                        ),
+                        Padding(padding: EdgeInsets.only(left: 30.0)), 
                       ],
                     ),
                   ],
@@ -179,7 +166,7 @@ Widget build(BuildContext context) {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>  VistaCamion()),
+                      MaterialPageRoute(builder: (context) =>   VistaCamion()),
                     );
                   },
                 ),
@@ -191,7 +178,7 @@ Widget build(BuildContext context) {
 
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>  VistaOperador()),
+                      MaterialPageRoute(builder: (context) =>   VistaOperador()),
                     );
 
                   },

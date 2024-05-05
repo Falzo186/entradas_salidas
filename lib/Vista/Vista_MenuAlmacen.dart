@@ -14,233 +14,246 @@ class Inicio extends StatefulWidget {
 
 class _InicioState extends State<Inicio> {
   @override
-  Widget build(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 41, 39, 39),
-          elevation: 0,
-          iconTheme: IconThemeData(
-            color: Colors.white,
-          ),
-        ),
-        iconTheme: const IconThemeData(
-          color: Color.fromARGB(255, 243, 238, 238),
-        ),
-      ),
-      child: Scaffold(
-        backgroundColor: const Color.fromRGBO(243, 238, 238, 1),
-        appBar: AppBar(
-          toolbarHeight: 0,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 25.0, top: 15),
-              child: IconButton(
-                icon: const Icon(
-                  Icons.exit_to_app,
-                  size: 35,
-                  color: Colors.white,
-                ),
-                onPressed: () {},
-              ),
+ Widget build(BuildContext context) {
+  return Scaffold(
+    body: Stack(
+      children: [
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height * 0.40,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 15, 58, 47),
+                Color.fromARGB(255, 52, 174, 190),
+              ],
             ),
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Stack(
-                clipBehavior: Clip.none,
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    // height: MediaQuery.of(context).size.height * 0.15,
-                    height: 100,
-                    // color: Colors.ransparent,
-                    decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 41, 39, 39)),
+          ),
+          child: const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    bottom: 130,
+                    left: 160,
                   ),
-                  Positioned(
-                    bottom: -35,
-                    child: Container(
-                      height: 70,
-                      width: 425,
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 70, 209, 191),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const SizedBox(
-                            width: 324,
-                            child: TextField(),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 10.0),
-                            child: IconButton(
-                              icon: const Icon(
-                                Icons.search,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                              onPressed: () {},
-                            ),
-                          ),
-                        ],
-                      ),
+                  child: Text(
+                    'Menú\n                Almacen',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
                     ),
                   ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 70,
-                  left: 30.0,
-                  right: 30.0,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 80),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          height: MediaQuery.of(context).size.width * 0.4,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Almacen()),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            child: const Text('Almacen',
-                                style: TextStyle(color: Colors.black)),
-                          ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          height: MediaQuery.of(context).size.width * 0.4,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Facturas()),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            child: const Text('Facturas',
-                                style: TextStyle(color: Colors.black)),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          height: MediaQuery.of(context).size.width * 0.4,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const HistorialSalida()),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            child: const Text('Historial de salida',
-                                style: TextStyle(color: Colors.black)),
-                          ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          height: MediaQuery.of(context).size.width * 0.4,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>  VistaReportes()),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            child: const Text('Reportes',
-                                style: TextStyle(color: Colors.black)),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 200,
               ),
             ],
           ),
         ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.80,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(90),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 60,
+                left: 40.0,
+                right: 40.0,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+  width: MediaQuery.of(context).size.width * 0.4,
+  height: MediaQuery.of(context).size.width * 0.4,
+  child: ElevatedButton(
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Almacen()),
+      );
+    },
+    style: ElevatedButton.styleFrom(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
       ),
-      // Positioned(
-      //   top: 100,
-      //   left: 0,
-      //   right: 0,
-      //   child: Padding(
-      //     padding: const EdgeInsets.only(
-      //       left: 25.0,
-      //       right: 25.0,
-      //     ),
-      //     child: Container(
-      //       height: 70,
-      //       decoration: BoxDecoration(
-      //         color: const Color.fromARGB(255, 70, 209, 191),
-      //         borderRadius: BorderRadius.circular(20),
-      //         ),
-      //         child: Row(
-      //           children: [
-      //             const Spacer(),
-      //             Padding(
-      //               padding: const EdgeInsets.only(right: 30.0),
-      //               child: IconButton(
-      //                 icon: const Icon(Icons.search, color: Colors.white,size: 30,),
-      //                 onPressed: () {
-      //                },
-      //               ),
-      //             ),
-      //            ],
-      //           ),
-      //         ),
-      //       ),
-      //     ),
-    );
-  }
+      side: const BorderSide(color: Colors.grey),
+    ),
+    child: const Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.store,
+          size: 40,
+          color: Colors.black,
+        ),
+        SizedBox(height: 10), 
+        Text(
+          'Almacen',
+          style: TextStyle(color: Colors.black),
+        ),
+      ],
+    ),
+  ),
+),
+                      SizedBox(
+  width: MediaQuery.of(context).size.width * 0.4,
+  height: MediaQuery.of(context).size.width * 0.4,
+  child: ElevatedButton(
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Facturas()),
+      );
+    },
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      side: const BorderSide(color: Colors.grey)
+    ),
+    child: const Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.request_quote_sharp,
+          size: 40,
+          color: Colors.black,
+        ),
+        SizedBox(height: 10), 
+        Text(
+          'Facturas',
+          style: TextStyle(color: Colors.black),
+        ),
+      ],
+    ),
+  ),
+),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+  width: MediaQuery.of(context).size.width * 0.4,
+  height: MediaQuery.of(context).size.width * 0.4,
+  child: ElevatedButton(
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const HistorialSalida()),
+      );
+    },
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      side: const BorderSide(color: Colors.grey)
+    ),
+    child: const Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.history_edu_outlined,
+          size: 40,
+          color: Colors.black,
+        ),
+        SizedBox(height: 10), 
+        Text(
+          'Historial de Salida',
+          style: TextStyle(color: Colors.black),
+        ),
+      ],
+    ),
+  ),
+),
+                      SizedBox(
+  width: MediaQuery.of(context).size.width * 0.4,
+  height: MediaQuery.of(context).size.width * 0.4,
+  child: ElevatedButton(
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => VistaReportes()),
+      );
+    },
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      side: const BorderSide(color: Colors.grey)
+    ),
+    child: const Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.receipt_long,
+          size: 40,
+          color: Colors.black,
+        ),
+        SizedBox(height: 10), 
+        Text(
+          'Reportes',
+          style: TextStyle(color: Colors.black),
+        ),
+      ],
+    ),
+  ),
+),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+  top: MediaQuery.of(context).padding.top + 100,
+  right: 15,
+  child: Container(
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(20),
+      border: Border.all(color: Colors.black, width: 2),
+      color: Colors.black, // Color de fondo blanco
+    ),
+    child: IconButton(
+      icon: const Icon(Icons.exit_to_app, size: 30,color: Colors.white,),
+      onPressed: () {
+        // Acción para salir
+      },
+    ),
+  ),
+),
+        Positioned(
+          top: MediaQuery.of(context).padding.top -55,
+          left: 0,
+          child: Container(
+            decoration: const BoxDecoration(),
+             child: Image.asset(
+        'lib/assets/camion.png', // Ruta de la imagen
+        width: 250, // Ancho de la imagen
+        height: 200, // Alto de la imagen
+      ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
 }

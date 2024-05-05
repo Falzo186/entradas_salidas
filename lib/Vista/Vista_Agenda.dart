@@ -10,17 +10,17 @@ class VistaAgenda extends StatefulWidget {
 }
 
 class _VistaAgendaState extends State<VistaAgenda> {
-  ControaldorAgenda controlador = ControaldorAgenda();
+  ControladorAgenda controlador = ControladorAgenda();
   List<Agenda> entradasProgramadas = [];
 
    List<Agenda> salidasProgramadas = [];
 
 void initState() {
   super.initState();
-  _cargarCamiones();
+  _cargarAgenda();
 }
 
-Future<void> _cargarCamiones() async {
+Future<void> _cargarAgenda() async {
   List<Agenda> listaAgendaEntrada = await controlador.obtenerAgendasEntrada();
   List<Agenda> listaAgendaSalida = await controlador.obtenerAgendasSalida();
   setState(() {

@@ -32,32 +32,26 @@ Future<void> _cargarCamiones() async {
 
 
   @override
-Widget build(BuildContext context) {
-
-
+  Widget build(BuildContext context) {
   return Theme(
   data: Theme.of(context).copyWith(
   appBarTheme: const AppBarTheme(
-  backgroundColor: Color.fromARGB(255, 41, 39, 39), // Color negro
-  elevation: 0, // Sin sombra debajo del AppBar
-  ),
-  iconTheme: const IconThemeData(
-  color: Colors.white, // Change the color to white
+  backgroundColor: Color.fromARGB(255, 41, 39, 39), 
+  elevation: 0,
   ),
   ),
   child: Scaffold(
   backgroundColor: Colors.white,
   appBar: AppBar(
   leading: IconButton(
-    icon: const Icon(Icons.arrow_back),
+    icon: const Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,),
     onPressed: () {
-    Navigator.pop(context); // Add the pop function to go back
+    Navigator.pop(context); 
     },
   ),
   actions: [
     IconButton(
-      
-    icon: const Icon(Icons.add),
+    icon: const Icon(Icons.add_outlined,size: 30,),
     color: Colors.white,
     onPressed: () {
        Navigator.push(
@@ -78,9 +72,9 @@ Widget build(BuildContext context) {
         future: controlador.getEstado(_camiones[index]),
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text('Estado: Loading...', style: const TextStyle(color: Color.fromARGB(255, 7, 68, 9)));
+            return const Text('Estado: Loading...', style: TextStyle(color: Color.fromARGB(255, 7, 68, 9)));
           } else if (snapshot.hasError) {
-            return Text('Estado: Error', style: const TextStyle(color: Color.fromARGB(255, 7, 68, 9)));
+            return const Text('Estado: Error', style: TextStyle(color: Color.fromARGB(255, 7, 68, 9)));
           } else {
             return Text('Estado: ${snapshot.data}', style: const TextStyle(color: Color.fromARGB(255, 7, 68, 9)));
           }

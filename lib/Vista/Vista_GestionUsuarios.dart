@@ -25,64 +25,111 @@ Future<void> _cargarUsuarios() async {
 
   @override
    Widget build(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 41, 39, 39), // Color negro
-          elevation: 0, // Sin sombra debajo del AppBar
-        ),
-        iconTheme: const IconThemeData(
-          color: Colors.white, // Change the color to white
-        ),
+  return Theme(
+    data: Theme.of(context).copyWith(
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context); // Add the pop function to go back
-            },
-          ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.add),
-              color: Colors.white,
-              onPressed: () {
-                Navigator.of(context, rootNavigator: true).push(
-                              MaterialPageRoute(
-                                builder: (context) => const RegistroUsuarios(),
-                              ),
-                            );
-              },
-            ),
-          ],
-        ),
-        body: Column(
-          children: <Widget>[
-            Expanded(
-              child: DataTable(
-                columns: const [
-                  DataColumn(label: Text('Nombre')),
-                  DataColumn(label: Text('Matrícula')),
-                  DataColumn(label: Text('Tipo de Usuario')),
-                  DataColumn(label: Text('Es Admin')),
+      iconTheme: const IconThemeData(
+        color: Colors.white,
+      ),
+    ),
+    child: Scaffold(
+      backgroundColor: Colors.white,
+      body: Column(
+        children: <Widget>[
+          Container(
+            height: MediaQuery.of(context).size.height * 0.03,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color.fromARGB(255, 15, 58, 47),
+                  Color.fromARGB(255, 52, 174, 190),
                 ],
-                rows: usuarios
-                    .map(
-                      (usuario) => DataRow(cells: [
-                        DataCell(Text(usuario.nombre)),
-                        DataCell(Text(usuario.matricula)),
-                        DataCell(Text(usuario.tipoUsuario)),
-                        DataCell(Text(usuario.esAdmin.toString())),
-                      ]),
-                    )
+              ),
+              
+            ),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: usuarios
+                    .map((usuario) => Container(
+                          margin: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.grey,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: DataTable(
+                            columns: const [
+                              DataColumn(label: Text('Nombre')),
+                              DataColumn(label: Text('Matrícula')),
+                              DataColumn(label: Text('Tipo de Usuario')),
+                              DataColumn(label: Text('Es Admin')),
+                            ],
+                            rows: [
+                              DataRow(cells: [
+                                DataCell(Text(usuario.nombre)),
+                                DataCell(Text(usuario.matricula)),
+                                DataCell(Text(usuario.tipoUsuario)),
+                                DataCell(Text(usuario.esAdmin.toString())),
+                              ]),
+                            ],
+                          ),
+                        ))
                     .toList(),
               ),
             ),
-          ],
+          ),
+        ],
+      ),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 15, 58, 47),
+                Color.fromARGB(255, 52, 174, 190),
+              ],
+            ),
+          ),
+          child: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new_outlined,
+                  color: Colors.white),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            title: const Text(
+              'Usuarios',
+              style: TextStyle(color: Colors.white, fontSize: 30),
+            ),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.add_outlined, size: 30),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const RegistroUsuarios()),
+                  );
+                },
+              ),
+            ],
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+          ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }

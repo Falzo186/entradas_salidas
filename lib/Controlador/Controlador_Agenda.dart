@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:entradas_salidas/Modelo/Agenda.dart';
 
-class ControaldorAgenda {
+class ControladorAgenda {
 
  final CollectionReference Agendas =FirebaseFirestore.instance.collection('Agendas');
 
@@ -13,6 +13,7 @@ class ControaldorAgenda {
       return false;
     }
   }
+
   Future<List<Agenda>> obtenerAgendasEntrada() async {
     try {
       QuerySnapshot querySnapshot = await Agendas

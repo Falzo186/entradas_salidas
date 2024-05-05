@@ -1,9 +1,31 @@
+import 'package:entradas_salidas/Controlador/Controlador_Almacen.dart';
 import 'package:flutter/material.dart';
 
-class Bajas extends StatelessWidget {
-  const Bajas({super.key});
+import 'package:flutter/material.dart';
 
- @override
+class Bajas extends StatefulWidget {
+  const Bajas({Key? key}) : super(key: key);
+
+  @override
+  State<Bajas> createState() => _BajasState();
+}
+
+class _BajasState extends State<Bajas> {
+  ControladorAlmacen controlador = ControladorAlmacen();
+
+  final folioController = TextEditingController();
+  final cantidadController = TextEditingController();
+  final usuarioController = TextEditingController();
+
+  @override
+  void dispose() {
+    folioController.dispose();
+    cantidadController.dispose();
+    usuarioController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -21,21 +43,10 @@ class Bajas extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: folioController,
+                decoration: const InputDecoration(
                   labelText: 'Folio',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                "Nombre",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Nombre',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -45,69 +56,10 @@ class Bajas extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: cantidadController,
+                decoration: const InputDecoration(
                   labelText: 'Cantidad',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                "Medición",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Medición',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                "Marca",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Marca',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                "Hora",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Hora',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                "Fecha",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Fecha',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                "Almacenista",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Almacenista',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -117,16 +69,32 @@ class Bajas extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: usuarioController,
+                decoration: const InputDecoration(
                   labelText: 'Usuario Despachado',
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: () {
-                  // Lógica para agregar
+                onPressed: () async {
+                  final folio = folioController.text;
+                  final cantidad = int.parse(cantidadController.text);
+                  final usuario = usuarioController.text;
+                  if(await controlador.eliminarProducto(folio, cantidad, usuario)){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Producto eliminado correctamente'),
+                      ),
+                    );
+                  }else{
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Error al eliminar el producto'),
+                      ),
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   shape: const RoundedRectangleBorder(

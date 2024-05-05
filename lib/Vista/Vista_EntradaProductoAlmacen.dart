@@ -1,7 +1,35 @@
+import 'package:entradas_salidas/Controlador/Controlador_Almacen.dart';
+import 'package:entradas_salidas/Modelo/Almacenobjeto.dart';
 import 'package:flutter/material.dart';
 
-class Altas extends StatelessWidget {
-  const Altas({super.key});
+
+class Altas extends StatefulWidget {
+  const Altas({Key? key}) : super(key: key);
+
+  @override
+  State<Altas> createState() => _AltasState();
+}
+
+class _AltasState extends State<Altas> {
+  ControladorAlmacen controlador = ControladorAlmacen();
+
+  final folioController = TextEditingController();
+  final nombreController = TextEditingController();
+  final cantidadController = TextEditingController();
+  final marcaController = TextEditingController();
+  final medicionController = TextEditingController();
+  final proveedorController = TextEditingController();
+
+  @override
+  void dispose() {
+    folioController.dispose();
+    nombreController.dispose();
+    cantidadController.dispose();
+    marcaController.dispose();
+    medicionController.dispose();
+    proveedorController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +49,11 @@ class Altas extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: folioController,
+                decoration: const InputDecoration(
                   labelText: 'Folio',
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16),
@@ -33,8 +62,9 @@ class Altas extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: nombreController,
+                decoration: const InputDecoration(
                   labelText: 'Nombre',
                   border: OutlineInputBorder(),
                 ),
@@ -45,8 +75,9 @@ class Altas extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: cantidadController,
+                decoration: const InputDecoration(
                   labelText: 'Cantidad',
                   border: OutlineInputBorder(),
                 ),
@@ -57,8 +88,9 @@ class Altas extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: marcaController,
+                decoration: const InputDecoration(
                   labelText: 'Marca',
                   border: OutlineInputBorder(),
                 ),
@@ -69,8 +101,9 @@ class Altas extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: medicionController,
+                decoration: const InputDecoration(
                   labelText: 'Medición',
                   border: OutlineInputBorder(),
                 ),
@@ -81,28 +114,39 @@ class Altas extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: proveedorController,
+                decoration: const InputDecoration(
                   labelText: 'Proveedor',
                   border: OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(height: 16),
-              const Text(
-                "Fecha",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Fecha',
-                  border: OutlineInputBorder(),
-                ),
-              ),
+
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: () {
-                  // Lógica para agregar
+                onPressed: () async {
+                  Almacenobjeto producto = Almacenobjeto(
+                    folio: folioController.text,
+                    nombre: nombreController.text,
+                    cantidad: int.parse(cantidadController.text),
+                    marca: marcaController.text,
+                    medicion: medicionController.text,
+                    proveedor: proveedorController.text,
+                  );
+
+                  if (await controlador.agregarProducto(producto)) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Producto agregado correctamente'),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Error al agregar el producto'),
+                      ),
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   shape: const RoundedRectangleBorder(

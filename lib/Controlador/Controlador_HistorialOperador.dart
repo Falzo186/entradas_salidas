@@ -21,10 +21,9 @@ Future<List<InfraccionOperador>> getRegistroInFraccionesOperador(String idChofer
   return registroInfracciones;
 }
 Future<void> agregarInfraccionAlcoholico() async {
-  String idChofer = '1'; // ID del chofer al que se le agregará la infracción
-  String infraccion = 'Conducir bajo los efectos del alcohol'; // Tipo de infracción
+  String idChofer = '1'; 
+  String infraccion = 'Conducir bajo los efectos del alcohol'; 
 
-  // Agregar la infracción a la colección de infracciones
   await Infracciones.add({
     'idChofer': idChofer,
     'Infraccion': infraccion,

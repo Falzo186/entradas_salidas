@@ -1,55 +1,39 @@
+import 'package:entradas_salidas/Controlador/Controlador_Agenda.dart';
+import 'package:entradas_salidas/Modelo/Agenda.dart';
 import 'package:entradas_salidas/Vista/Vista_DetalleEntradaCamion.dart';
 import 'package:entradas_salidas/Vista/Vista_DetallesSalidaCamiones.dart';
 import 'package:flutter/material.dart';
+class VistaAgenda extends StatefulWidget {
 
-import '../Modelo/EntradaCamiones.dart';
-import '../Modelo/SalidaCamiones.dart';
+  @override
+  State<VistaAgenda> createState() => _VistaAgendaState();
+}
 
-class VistaAgenda extends StatelessWidget {
+class _VistaAgendaState extends State<VistaAgenda> {
+  ControaldorAgenda controlador = ControaldorAgenda();
+  List<Agenda> entradasProgramadas = [];
 
-  final List<EntradaCamiones> entradasProgramadas = [
-    EntradaCamiones(
-      matriculaCamion: 'XXXX-XXX',
-      horaEntrada: '08:00',
-      tipodeCarga: 'Carga de prueba',
-      pesoCarga: '1000 kg',
-      destinoCarga: 'Destino de prueba',
-      nombreConductor: 'Conductor de prueba',
-    ),
-    EntradaCamiones(
-      matriculaCamion: 'YYYY-YYY',
-      horaEntrada: '10:00',
-      tipodeCarga: 'Carga de prueba',
-      pesoCarga: '1000 kg',
-      destinoCarga: 'Destino de prueba',
-      nombreConductor: 'Conductor de prueba',
-    ),
-  ];
+   List<Agenda> salidasProgramadas = [];
 
-  final List<SalidaCamiones> salidasProgramadas = [
-    SalidaCamiones(
-      matriculaCamion: 'ZZZZ-ZZZ',
-      horaSalida: '12:00',
-      tipodeCarga: 'Carga de prueba',
-      pesoCarga: '1000 kg',
-      destinoCarga: 'Destino de prueba',
-      nombreConductor: 'Conductor de prueba',
-    ),
-    SalidaCamiones(
-      matriculaCamion: 'WWWW-WWW',
-      horaSalida: '14:00',
-      tipodeCarga: 'Carga de prueba',
-      pesoCarga: '1000 kg',
-      destinoCarga: 'Destino de prueba',
-      nombreConductor: 'Conductor de prueba',
-    ),
-  ];
+void initState() {
+  super.initState();
+  _cargarCamiones();
+}
+
+Future<void> _cargarCamiones() async {
+  List<Agenda> listaAgendaEntrada = await controlador.obtenerAgendasEntrada();
+  List<Agenda> listaAgendaSalida = await controlador.obtenerAgendasSalida();
+  setState(() {
+    salidasProgramadas = listaAgendaSalida;
+    entradasProgramadas = listaAgendaEntrada;
+  });
+}
 
   @override
    Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Agenda'),
+        title: const Text('Agenda'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +49,7 @@ class VistaAgenda extends StatelessWidget {
                   children: [
                     ListTile(
                       title: Text('Camión: ${entradasProgramadas[index].matriculaCamion}'),
-                      subtitle: Text('Hora de Entrada: ${entradasProgramadas[index].horaEntrada}'),
+                      subtitle: Text('Hora de Entrada: ${entradasProgramadas[index].hora}'),
                       onTap: () {
                         Navigator.push(
                           context,
@@ -92,7 +76,7 @@ class VistaAgenda extends StatelessWidget {
                   children: [
                     ListTile(
                       title: Text('Camión: ${salidasProgramadas[index].matriculaCamion}'),
-                      subtitle: Text('Hora de Salida: ${salidasProgramadas[index].horaSalida}'),
+                      subtitle: Text('Hora de Salida: ${salidasProgramadas[index].hora}'),
                       onTap: () {
                         Navigator.push(
                           context,

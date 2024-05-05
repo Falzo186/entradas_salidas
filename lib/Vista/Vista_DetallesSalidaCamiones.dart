@@ -1,9 +1,9 @@
-import 'package:entradas_salidas/Modelo/SalidaCamiones.dart';
+import 'package:entradas_salidas/Modelo/Agenda.dart';
 import 'package:entradas_salidas/Vista/ExitChecklistScreen.dart';
 import 'package:flutter/material.dart';
 
 class DetalleSalidaCamion extends StatelessWidget {
-  final SalidaCamiones salida;
+  final Agenda salida;
 
   DetalleSalidaCamion({required this.salida});
 
@@ -18,12 +18,14 @@ class DetalleSalidaCamion extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text('Folio: ${salida.folio}'),
             Text('Camión: ${salida.matriculaCamion}'),
-            Text('Hora de Salida: ${salida.horaSalida}'),
+            Text('Nombre del Conductor: ${salida.nombreOperador}'),
+            Text( 'Fecha: ${salida.fecha}'),
+            Text('Hora de Entrada: ${salida.hora}'),
             Text('Tipo de Carga: ${salida.tipodeCarga}'),
             Text('Peso de Carga: ${salida.pesoCarga}'),
             Text('Destino de Carga: ${salida.destinoCarga}'),
-            Text('Nombre del Conductor: ${salida.nombreConductor}'),
           ],
         ),
       ),

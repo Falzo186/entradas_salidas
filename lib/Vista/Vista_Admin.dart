@@ -1,3 +1,4 @@
+import 'package:entradas_salidas/Vista/Vista_AltasAgenda.dart';
 import 'package:entradas_salidas/Vista/Vista_GestionUsuarios.dart';
 import 'package:entradas_salidas/Vista/Vista_MenuAlmacen.dart';
 import 'package:entradas_salidas/Vista/Vista_MenuVigilante.dart';
@@ -45,6 +46,11 @@ class _VistaAdminState extends State<VistaAdmin> {
             ElevatedButton(
               onPressed: () {
                  // Acción para el botón "Gestionar Entradas"
+                Navigator.of(context, rootNavigator: true).push(
+                                MaterialPageRoute(
+                                  builder: (context) => VistaAltaAgenda(),
+                                ),
+                              );
                  
               },
               child: Text('Gestionar Agenda'),

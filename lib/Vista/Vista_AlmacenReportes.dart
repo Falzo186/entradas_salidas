@@ -31,27 +31,31 @@ Widget build(BuildContext context) {
       title: const Text('Almacén'),
     ),
     body: SingleChildScrollView(
-      child: DataTable(
-        columns: const [
-          DataColumn(label: Text('Tipo')),
-          DataColumn(label: Text('Nom. Producto')),
-          DataColumn(label: Text('Cantidad')),
-          DataColumn(label: Text('fecha')),
-          DataColumn(label: Text('Usuario')),
-          DataColumn(label: Text('encargado')),
-        ],
-        rows: reportes.map((objeto) {
-          return DataRow(cells: [
-            DataCell(Text(objeto.tipo)),
-            DataCell(Text(objeto.nomproducto)),
-            DataCell(Text(objeto.Cantidad.toString())),
-            DataCell(Text(objeto.Fecha.toString())),
-            DataCell(Text(objeto.Usuario)),
-            DataCell(Text(objeto.Encargado)),
-          ]);
-        }).toList(),
+      scrollDirection: Axis.horizontal,
+      child: SingleChildScrollView(
+        child: DataTable(
+          columns: const [
+            DataColumn(label: Text('Tipo')),
+            DataColumn(label: Text('Nom. Producto')),
+            DataColumn(label: Text('Cantidad')),
+            DataColumn(label: Text('Fecha')),
+            DataColumn(label: Text('Usuario')),
+            DataColumn(label: Text('Encargado')),
+          ],
+          rows: reportes.map((objeto) {
+            return DataRow(cells: [
+              DataCell(Text(objeto.tipo)),
+              DataCell(Text(objeto.nomproducto)),
+              DataCell(Text(objeto.Cantidad.toString())),
+              DataCell(Text(objeto.Fecha.toString())),
+              DataCell(Text(objeto.Usuario)),
+              DataCell(Text(objeto.Encargado)),
+            ]);
+          }).toList(),
+        ),
       ),
     ),
   );
 }
+
 }

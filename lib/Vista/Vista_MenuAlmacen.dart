@@ -1,9 +1,9 @@
 // Inicio.dart
+import 'package:entradas_salidas/Vista/Vista_AltaFacturas.dart';
+import 'package:entradas_salidas/Vista/Vista_ConsultaAlmacen.dart';
 import 'package:flutter/material.dart';
 import 'Vista_Almacen.dart'; 
 import 'Vista_AlmacenReportes.dart';
-import 'Vista_AlmacenFacturas.dart';
-import 'Vista_AlmacenHistorialSalida.dart';
 
 class Inicio extends StatefulWidget {
   const Inicio({super.key});
@@ -115,7 +115,7 @@ class _InicioState extends State<Inicio> {
     onPressed: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const Facturas()),
+        MaterialPageRoute(builder: (context) => AltaFactura()),
       );
     },
     style: ElevatedButton.styleFrom(
@@ -155,7 +155,7 @@ class _InicioState extends State<Inicio> {
     onPressed: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const HistorialSalida()),
+        MaterialPageRoute(builder: (context) => VistaConsultas()),
       );
     },
     style: ElevatedButton.styleFrom(

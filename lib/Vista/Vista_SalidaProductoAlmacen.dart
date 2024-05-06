@@ -95,6 +95,7 @@ class _BajasState extends State<Bajas> {
                       ),
                     );
                   }
+                  dispose();
                 },
                 style: ElevatedButton.styleFrom(
                   shape: const RoundedRectangleBorder(

@@ -147,6 +147,7 @@ class _AltasState extends State<Altas> {
                       ),
                     );
                   }
+                  dispose();
                 },
                 style: ElevatedButton.styleFrom(
                   shape: const RoundedRectangleBorder(

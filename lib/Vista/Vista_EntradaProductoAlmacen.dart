@@ -20,15 +20,13 @@ class _AltasState extends State<Altas> {
   final medicionController = TextEditingController();
   final proveedorController = TextEditingController();
 
-  @override
   void dispose() {
-    folioController.dispose();
-    nombreController.dispose();
-    cantidadController.dispose();
-    marcaController.dispose();
-    medicionController.dispose();
-    proveedorController.dispose();
-    super.dispose();
+    folioController.clear();
+    nombreController.clear();
+    cantidadController.clear();
+    marcaController.clear();
+    medicionController.clear();
+    proveedorController.clear();
   }
 
   @override

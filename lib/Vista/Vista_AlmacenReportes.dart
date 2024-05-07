@@ -25,37 +25,85 @@ Future<void> cargarReportes() async {
 
 
  @override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: const Text('Almacén'),
-    ),
-    body: SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: SingleChildScrollView(
-        child: DataTable(
-          columns: const [
-            DataColumn(label: Text('Tipo')),
-            DataColumn(label: Text('Nom. Producto')),
-            DataColumn(label: Text('Cantidad')),
-            DataColumn(label: Text('Fecha')),
-            DataColumn(label: Text('Usuario')),
-            DataColumn(label: Text('Encargado')),
-          ],
-          rows: reportes.map((objeto) {
-            return DataRow(cells: [
-              DataCell(Text(objeto.tipo)),
-              DataCell(Text(objeto.nomproducto)),
-              DataCell(Text(objeto.Cantidad.toString())),
-              DataCell(Text(objeto.Fecha.toString())),
-              DataCell(Text(objeto.Usuario)),
-              DataCell(Text(objeto.Encargado)),
-            ]);
-          }).toList(),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: const Text('Reportes', style: TextStyle(color: Color.fromARGB(255, 255, 253, 253))),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add_outlined, size: 30),
+            color: Colors.white,
+            onPressed: () {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const AltaCamionView()),
+              // );
+            },
+          ),
+        ],
       ),
-    ),
-  );
-}
+      body: ListView(
+        scrollDirection: Axis.vertical,
+        children: reportes.map((objeto) {
+          return GestureDetector(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text('Especificaciones'),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Tipo: ${objeto.tipo}'),
+                        Text('Nom. Producto: ${objeto.nomproducto}'),
+                        Text('Cantidad: ${objeto.Cantidad}'),
+                        Text('Fecha: ${objeto.Fecha}'),
+                        Text('Usuario: ${objeto.Usuario}'),
+                        Text('Encargado: ${objeto.Encargado}'),
+                      ],
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Cerrar'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            child: Container(
+              width: 150.0,
+              margin: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Tipo: ${objeto.tipo}'),
+                  Text('Fecha: ${objeto.Fecha}'),
+                ],
+              ),
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
 
 }

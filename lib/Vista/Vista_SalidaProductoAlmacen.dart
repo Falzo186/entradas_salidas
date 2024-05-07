@@ -19,10 +19,9 @@ class _BajasState extends State<Bajas> {
 
   @override
   void dispose() {
-    folioController.dispose();
-    cantidadController.dispose();
-    usuarioController.dispose();
-    super.dispose();
+    folioController.clear();
+    cantidadController.clear();
+    usuarioController.clear();
   }
 
   @override

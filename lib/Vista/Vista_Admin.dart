@@ -254,7 +254,7 @@ Widget build(BuildContext context) {
             child: IconButton(
               icon: const Icon(Icons.exit_to_app, size: 30,color: Colors.white,),
               onPressed: () {
-                // Acción para salir
+                Navigator.pop(context);
               },
             ),
           ),

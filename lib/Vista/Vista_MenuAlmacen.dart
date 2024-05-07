@@ -12,9 +12,10 @@ class Inicio extends StatefulWidget {
   _InicioState createState() => _InicioState();
 }
 
+
 class _InicioState extends State<Inicio> {
   @override
- Widget build(BuildContext context) {
+Widget build(BuildContext context) {
   return Scaffold(
     body: Stack(
       children: [
@@ -76,72 +77,71 @@ class _InicioState extends State<Inicio> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-  width: MediaQuery.of(context).size.width * 0.4,
-  height: MediaQuery.of(context).size.width * 0.4,
-  child: ElevatedButton(
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Almacen()),
-      );
-    },
-    style: ElevatedButton.styleFrom(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      side: const BorderSide(color: Colors.grey),
-    ),
-    child: const Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(
-          Icons.store,
-          size: 40,
-          color: Colors.black,
-        ),
-        SizedBox(height: 10), 
-        Text(
-          'Almacen',
-          style: TextStyle(color: Colors.black),
-        ),
-      ],
-    ),
-  ),
-),
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        height: MediaQuery.of(context).size.width * 0.4,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const Almacen()),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            side: const BorderSide(color: Colors.grey),
+                          ),
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.store,
+                                size: 40,
+                                color: Colors.black,
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                'Almacén',
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                       SizedBox(
-  width: MediaQuery.of(context).size.width * 0.4,
-  height: MediaQuery.of(context).size.width * 0.4,
-  child: ElevatedButton(
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => AltaFactura()),
-      );
-    },
-    style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      side: const BorderSide(color: Colors.grey)
-    ),
-    child: const Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(
-          Icons.request_quote_sharp,
-          size: 40,
-          color: Colors.black,
-        ),
-        SizedBox(height: 10), 
-        Text(
-          'Facturas',
-          style: TextStyle(color: Colors.black),
-        ),
-      ],
-    ),
-  ),
-),
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        height: MediaQuery.of(context).size.width * 0.4,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => AltaFactura()),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              side: const BorderSide(color: Colors.grey)),
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.request_quote_sharp,
+                                size: 40,
+                                color: Colors.black,
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                'Facturas',
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -149,73 +149,71 @@ class _InicioState extends State<Inicio> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-  width: MediaQuery.of(context).size.width * 0.4,
-  height: MediaQuery.of(context).size.width * 0.4,
-  child: ElevatedButton(
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => VistaConsultas()),
-      );
-    },
-    style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      side: const BorderSide(color: Colors.grey)
-    ),
-    child: const Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(
-          Icons.history_edu_outlined,
-          size: 40,
-          color: Colors.black,
-        ),
-        SizedBox(height: 10), 
-        Text(
-          'Historial de Salida',
-          style: TextStyle(color: Colors.black),
-        ),
-      ],
-    ),
-  ),
-),
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        height: MediaQuery.of(context).size.width * 0.4,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => VistaConsultas()),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              side: const BorderSide(color: Colors.grey)),
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.search,
+                                size: 40,
+                                color: Colors.black,
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                'Catálogo de Productos',
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                       SizedBox(
-  width: MediaQuery.of(context).size.width * 0.4,
-  height: MediaQuery.of(context).size.width * 0.4,
-  child: ElevatedButton(
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => VistaReportes()),
-      );
-    },
-    style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      side: const BorderSide(color: Colors.grey)
-    ),
-    child: const Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(
-          Icons.receipt_long,
-          size: 40,
-          color: Colors.black,
-        ),
-        SizedBox(height: 10), 
-        Text(
-          'Reportes',
-          style: TextStyle(color: Colors.black),
-        ),
-      ],
-    ),
-  ),
-),
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        height: MediaQuery.of(context).size.width * 0.4,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => VistaReportes()),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              side: const BorderSide(color: Colors.grey)),
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.receipt_long,
+                                size: 40,
+                                color: Colors.black,
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                'Reportes',
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -224,32 +222,36 @@ class _InicioState extends State<Inicio> {
           ),
         ),
         Positioned(
-  top: MediaQuery.of(context).padding.top + 100,
-  right: 15,
-  child: Container(
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(20),
-      border: Border.all(color: Colors.black, width: 2),
-      color: Colors.black, // Color de fondo blanco
-    ),
-    child: IconButton(
-      icon: const Icon(Icons.exit_to_app, size: 30,color: Colors.white,),
-      onPressed: () {
-        // Acción para salir
-      },
-    ),
-  ),
-),
+          top: MediaQuery.of(context).padding.top + 100,
+          right: 15,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: Colors.black, width: 2),
+              color: Colors.black, // Color de fondo blanco
+            ),
+            child: IconButton(
+              icon: const Icon(
+                Icons.exit_to_app,
+                size: 30,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+        ),
         Positioned(
-          top: MediaQuery.of(context).padding.top -55,
+          top: MediaQuery.of(context).padding.top - 55,
           left: 0,
           child: Container(
             decoration: const BoxDecoration(),
-             child: Image.asset(
-        'lib/assets/camion.png', // Ruta de la imagen
-        width: 250, // Ancho de la imagen
-        height: 200, // Alto de la imagen
-      ),
+            child: Image.asset(
+              'lib/assets/camion.png', // Ruta de la imagen
+              width: 250, // Ancho de la imagen
+              height: 200, // Alto de la imagen
+            ),
           ),
         ),
       ],

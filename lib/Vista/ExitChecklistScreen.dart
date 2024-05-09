@@ -1,7 +1,12 @@
+import 'package:entradas_salidas/Controlador/Controlador_ReporteVigilante.dart';
+import 'package:entradas_salidas/Modelo/AgendaReturn.dart';
+import 'package:entradas_salidas/Modelo/ObservacionVigilante.dart';
+import 'package:entradas_salidas/Modelo/ReporteVigilante.dart';
 import 'package:flutter/material.dart';
 
 class ExitChecklistScreen extends StatefulWidget {
-  const ExitChecklistScreen({super.key});
+  final Agenda2 salida;
+  const ExitChecklistScreen({super.key, required this.salida});
 
   
   @override
@@ -9,15 +14,18 @@ class ExitChecklistScreen extends StatefulWidget {
 }
 
 class _ExitChecklistScreenState extends State<ExitChecklistScreen> {
-  bool tiresChecked = false;
-  bool brakesChecked = false;
-  bool lightsChecked = false;
-  bool fluidsChecked = false;
-  bool hornChecked = false;
-  bool mirrorsChecked = false;
-  bool paperworkChecked = false;
-  bool fuelChecked = false;
-  bool cargoChecked = false;
+  controlador_ReporteVigilante controlador = controlador_ReporteVigilante();
+  String cadena = '';
+  final observacionesController = TextEditingController();
+  bool neumaticosRevisados = false;
+  bool frenosRevisados = false;
+  bool lucesRevisadas = false;
+  bool fluidosRevisados = false;
+  bool claxonRevisado = false;
+  bool espejosRevisados = false;
+  bool documentacionRevisada = false;
+  bool combustibleVerificado = false;
+  bool cargaVerificada = false;
 
   @override
   Widget build(BuildContext context) {
@@ -36,143 +44,278 @@ class _ExitChecklistScreenState extends State<ExitChecklistScreen> {
               const SizedBox(height: 8),
               CheckboxListTile(
                 title: const Text('Neumáticos revisados'),
-                value: tiresChecked,
+                value: neumaticosRevisados,
                 onChanged: (bool? value) {
                   setState(() {
-                    tiresChecked = value ?? false;
+                    neumaticosRevisados = value ?? false;
                   });
                 },
               ),
               CheckboxListTile(
                 title: const Text('Frenos revisados'),
-                value: brakesChecked,
+                value: frenosRevisados,
                 onChanged: (bool? value) {
                   setState(() {
-                    brakesChecked = value ?? false;
+                    frenosRevisados = value ?? false;
                   });
                 },
               ),
               CheckboxListTile(
                 title: const Text('Luces revisadas'),
-                value: lightsChecked,
+                value: lucesRevisadas,
                 onChanged: (bool? value) {
                   setState(() {
-                    lightsChecked = value ?? false;
+                    lucesRevisadas = value ?? false;
                   });
                 },
               ),
               CheckboxListTile(
                 title: const Text('Fluidos revisados'),
-                value: fluidsChecked,
+                value: fluidosRevisados,
                 onChanged: (bool? value) {
                   setState(() {
-                    fluidsChecked = value ?? false;
+                    fluidosRevisados = value ?? false;
                   });
                 },
               ),
               CheckboxListTile(
                 title: const Text('Claxon revisado'),
-                value: hornChecked,
+                value: claxonRevisado,
                 onChanged: (bool? value) {
                   setState(() {
-                    hornChecked = value ?? false;
+                    claxonRevisado = value ?? false;
                   });
                 },
               ),
               CheckboxListTile(
                 title: const Text('Espejos revisados'),
-                value: mirrorsChecked,
+                value: espejosRevisados,
                 onChanged: (bool? value) {
                   setState(() {
-                    mirrorsChecked = value ?? false;
+                    espejosRevisados = value ?? false;
                   });
                 },
               ),
               CheckboxListTile(
                 title: const Text('Documentación verificada'),
-                value: paperworkChecked,
+                value: documentacionRevisada,
                 onChanged: (bool? value) {
                   setState(() {
-                    paperworkChecked = value ?? false;
+                    documentacionRevisada = value ?? false;
                   });
                 },
               ),
               CheckboxListTile(
                 title: const Text('Combustible verificado'),
-                value: fuelChecked,
+                value: combustibleVerificado,
                 onChanged: (bool? value) {
                   setState(() {
-                    fuelChecked = value ?? false;
+                    combustibleVerificado = value ?? false;
                   });
                 },
               ),
               CheckboxListTile(
                 title: const Text('Carga verificada'),
-                value: cargoChecked,
+                value: cargaVerificada,
                 onChanged: (bool? value) {
                   setState(() {
-                    cargoChecked = value ?? false;
+                    cargaVerificada = value ?? false;
                   });
                 },
               ),
-              const SizedBox(height: 16),
-              const Row(
-                children: [
-                  Text('Nombre del Chofer:'),
-                  SizedBox(width: 8),
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Nombre del Chofer',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
               const SizedBox(height: 8),
-              const Row(
-                children: [
-                  Text('ID del Camión:'),
-                  SizedBox(width: 8),
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: 'ID del Camión',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                ],
+              const Text('Observaciones:', style: TextStyle(fontSize: 18)),
+              const SizedBox(height: 8),
+              TextField(
+                controller: observacionesController,
+                decoration: const InputDecoration(
+                  labelText: 'Observaciones',
+                  border: const OutlineInputBorder(),
+                ),
+                maxLines: 3,
               ),
               const SizedBox(height: 16),
-              const Row(
-                children: [
-                  Text('Observaciones:'),
-                  SizedBox(width: 8),
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Observaciones',
-                        border: OutlineInputBorder(),
-                      ),
-                      maxLines: 3,
-                    ),
-                  ),
-                ],
-              ),
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   // Acción para guardar la salida
+                  if (neumaticosRevisados &&
+                      frenosRevisados &&
+                      lucesRevisadas &&
+                      fluidosRevisados &&
+                      claxonRevisado &&
+                      espejosRevisados &&
+                      documentacionRevisada &&
+                      combustibleVerificado &&
+                      cargaVerificada) {
+                    // Acción para guardar la entrada
+                    if(await controlador.agregarReporteVigilante(
+                      ReporteVigilante(
+                        folio: widget.salida.folio,
+                        matriculaCamion: widget.salida.matriculaCamion,
+                        fecha: widget.salida.fecha,
+                        hora: widget.salida.hora,
+                        tipo: 'Salida',
+                        VigilanteAsignado: 'Vigilante asignado',
+                        Estado: 'Aceptado',
+                        Motivo: 'Cumplimiento de checklist, todos los elementos revisados,revise el panel de observaciones para mas detalles',
+                      ),
+                    )){
+                    await controlador.eliminarAgenda(widget.salida.folio);
+                    // ignore: use_build_context_synchronously
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Entrada aceptada'),
+                          content: const Text('La entrada ha sido aceptada.'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('Aceptar'),
+                            ),
+                          ],
+                        );
+                      },
+                    );}
+                  } else {
+                    String checklistPendiente = 'CheckList pendiente\n';
+                    if (!neumaticosRevisados) {
+                      checklistPendiente += '-Neumáticos\n';
+                    }
+                    if (!frenosRevisados) {
+                      checklistPendiente += '-Frenos\n';
+                    }
+                    if (!lucesRevisadas) {
+                      checklistPendiente += '-Luces\n';
+                    }
+                    if (!fluidosRevisados) {
+                      checklistPendiente += '-Fluidos\n';
+                    }
+                    if (!claxonRevisado) {
+                      checklistPendiente += '-Claxon\n';
+                    }
+                    if (!espejosRevisados) {
+                      checklistPendiente += '-Espejos\n';
+                    }
+                    if (!documentacionRevisada) {
+                      checklistPendiente += '-Documentacion\n';
+                    }
+                    if (!combustibleVerificado) {
+                      checklistPendiente += '-Combustible\n';
+                    }
+                    if (!cargaVerificada) {
+                      checklistPendiente += '-Carga\n';
+                    }
+                    setState(() {
+                      cadena = checklistPendiente;
+                    });
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.zero, // Bordes rectangulares
                   ),
                 ),
-                child: const Text('Guardar salida'),
+                child: const Text('Aceptar salida'),
               ),
+              ElevatedButton(
+                onPressed: () async {
+                  if (neumaticosRevisados &&
+                      frenosRevisados &&
+                      lucesRevisadas &&
+                      fluidosRevisados &&
+                      claxonRevisado &&
+                      espejosRevisados &&
+                      documentacionRevisada &&
+                      combustibleVerificado &&
+                      cargaVerificada &&
+
+                      documentacionRevisada) {
+                    // Acción para guardar la entrada
+                  } else {
+                    String checklistPendiente = 'CheckList pendiente,revise el panel de observaciones para mas informacion\n';
+                    checklistPendiente += 'no se completo el check list de:\n';
+                    if (!neumaticosRevisados) {
+                      checklistPendiente += '-Neumáticos\n';
+                    }
+                    if (!frenosRevisados) {
+                      checklistPendiente += '-Frenos\n';
+                    }
+                    if (!lucesRevisadas) {
+                      checklistPendiente += '-Luces\n';
+                    }
+                    if (!fluidosRevisados) {
+                      checklistPendiente += '-Fluidos\n';
+                    }
+                    if (!claxonRevisado) {
+                      checklistPendiente += '-Claxon\n';
+                    }
+                    if (!espejosRevisados) {
+                      checklistPendiente += '-Espejos\n';
+                    }
+                    if (!documentacionRevisada) {
+                      checklistPendiente += '-Documentacion\n';
+                    }
+                    if (!combustibleVerificado) {
+                      checklistPendiente += '-Combustible \n';
+                    }
+                    if (!cargaVerificada) {
+                      checklistPendiente += '-Carga \n';
+                    }
+                     if (await controlador.agregarReporteVigilante(
+                      ReporteVigilante(
+                        folio: widget.salida.folio,
+                        matriculaCamion: widget.salida.matriculaCamion,
+                        fecha: widget.salida.fecha,
+                        hora: widget.salida.hora,
+                        tipo: 'Salida',
+                        VigilanteAsignado: 'Vigilante asignado',
+                        Estado: 'Negado',
+                        Motivo: 'Negación de Salida, no se completó el checklist\n$checklistPendiente',
+                      ),
+                    )){
+                  await controlador.eliminarAgenda(widget.salida.folio);
+                    await controlador.agregarObservacionVigilante(
+                      ObservacionVigilante(
+                        folio: widget.salida.folio,
+                        observacion: observacionesController.text, 
+                      ),
+                    );}
+                    // ignore: use_build_context_synchronously
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Salida rechazada'),
+                          content: const Text('se ha rechazado la salida, revise el panel de observaciones para mas detalles.'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('cerrar'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero, // Bordes rectangulares
+                  ),
+                ),
+                child: const Text('Negar Salida'),
+              ),
+              if (cadena.isNotEmpty)
+                Text(
+                  'Elementos pendientes:\n$cadena',
+                  style: const TextStyle(color: Colors.red),
+                ),
             ],
           ),
         ),

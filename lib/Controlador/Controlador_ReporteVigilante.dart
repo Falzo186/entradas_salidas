@@ -42,7 +42,7 @@ Future<void> eliminarAgenda(String folio) async {
   Future<List<ReporteVigilante>> obtenerReporteVigilanteEntrada() async {
     try {
       QuerySnapshot querySnapshot = await ReporteVigilant
-          .where('tipo', isEqualTo: 'Entrada')
+          
           .orderBy('fecha', descending: false)
           .get();
       return querySnapshot.docs.map((doc) => ReporteVigilante.fromFirestore(doc)).toList();

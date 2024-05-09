@@ -154,6 +154,7 @@ Widget build(BuildContext context) {
                           TextButton(
                             child: const Text('Aceptar'),
                             onPressed: () {
+                            clear();
                             Navigator.pop(context);
                             Navigator.pop(context);
                             },

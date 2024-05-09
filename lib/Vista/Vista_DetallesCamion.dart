@@ -196,12 +196,12 @@ class _VistaDetallesCamionState extends State<VistaDetallesCamion> {
                       icon: const Icon(Icons.arrow_circle_right_outlined, size: 40),
                       color: Colors.white,
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ExitChecklistScreen(),
-                          ),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => const ExitChecklistScreen(),
+                        //   ),
+                        // );
                       },
                     ),
                   ],

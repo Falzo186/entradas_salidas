@@ -34,7 +34,7 @@ class DetalleSalidaCamion extends StatelessWidget {
            Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const ExitChecklistScreen(),
+                            builder: (context) => ExitChecklistScreen(salida: salida),
                           ),
                         );
         },

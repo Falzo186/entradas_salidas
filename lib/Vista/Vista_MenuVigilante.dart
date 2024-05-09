@@ -3,6 +3,7 @@ import 'package:entradas_salidas/Modelo/Camion.dart';
 import 'package:entradas_salidas/Vista/HistoryScreen.dart';
 import 'package:entradas_salidas/Vista/Vista_Agenda.dart';
 import 'package:entradas_salidas/Vista/Vista_Camion.dart';
+import 'package:entradas_salidas/Vista/Vista_ObservacionesVigilante.dart';
 import 'package:entradas_salidas/Vista/Vista_Operador.dart';
 import 'package:flutter/material.dart';
 class MenuVigilante extends StatefulWidget {
@@ -246,6 +247,17 @@ Widget build(BuildContext context) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => HistoryScreen()),
+                      );
+                    },
+                  ),
+                   const SizedBox(width: 20),
+                  IconButton(
+                    icon: const Icon(Icons.note, size: 40),
+                    color: Colors.white,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => vistaObservaciones()),
                       );
                     },
                   ),

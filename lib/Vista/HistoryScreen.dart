@@ -56,7 +56,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 if (entry.Estado == 'Aceptado') {
                   tileColor = Colors.green;
                 } else if (entry.Estado == 'Negado') {
-                  tileColor = Colors.orange;
+                  tileColor = Colors.red;
                 }
 
                 return GestureDetector(

@@ -1,9 +1,10 @@
-import 'package:entradas_salidas/Modelo/Agenda.dart';
+
+import 'package:entradas_salidas/Modelo/AgendaReturn.dart';
 import 'package:entradas_salidas/Vista/ExitChecklistScreen.dart';
 import 'package:flutter/material.dart';
 
 class DetalleSalidaCamion extends StatelessWidget {
-  final Agenda salida;
+  final Agenda2 salida;
 
   DetalleSalidaCamion({required this.salida});
 
@@ -22,7 +23,6 @@ class DetalleSalidaCamion extends StatelessWidget {
             Text('Camión: ${salida.matriculaCamion}'),
             Text('Nombre del Conductor: ${salida.nombreOperador}'),
             Text( 'Fecha: ${salida.fecha}'),
-            Text('Hora de Entrada: ${salida.hora}'),
             Text('Tipo de Carga: ${salida.tipodeCarga}'),
             Text('Peso de Carga: ${salida.pesoCarga}'),
             Text('Destino de Carga: ${salida.destinoCarga}'),

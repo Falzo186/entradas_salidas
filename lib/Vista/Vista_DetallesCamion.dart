@@ -177,12 +177,12 @@ class _VistaDetallesCamionState extends State<VistaDetallesCamion> {
                       icon: const Icon(Icons.offline_pin_outlined, size: 40),
                       color: Colors.white,
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const EntryChecklistScreen(),
-                          ),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => const EntryChecklistScreen(),
+                        //   ),
+                        // );
                       },
                     ),
                     const SizedBox(width: 20),

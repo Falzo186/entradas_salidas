@@ -1,3 +1,4 @@
+import 'package:entradas_salidas/Vista/Vista_AltafechayhoraEjemplo.dart';
 import 'package:entradas_salidas/Vista/Vista_AltasAgenda.dart';
 import 'package:entradas_salidas/Vista/Vista_GestionUsuarios.dart';
 import 'package:entradas_salidas/Vista/Vista_MenuAlmacen.dart';

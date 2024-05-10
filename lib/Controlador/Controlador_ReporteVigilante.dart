@@ -13,7 +13,7 @@ final CollectionReference _camionesCollection =FirebaseFirestore.instance.collec
 final CollectionReference Historial = FirebaseFirestore.instance.collection('HistorialOperador');  
 
 
-Future<void> eliminarAgenda(String folio,String nombreOperador,bool enTransito) async {
+Future<void> eliminarAgenda(String folio,String nombreOperador,bool enTransito,String tipo) async {
   try {
     // Obtener la agenda a eliminar
     QuerySnapshot querySnapshot = await Agendas.where('folio', isEqualTo: folio).get();
@@ -50,14 +50,14 @@ Future<void> eliminarAgenda(String folio,String nombreOperador,bool enTransito) 
             });
           // Agregar el historial de operador
           await Historial.add({
-            'idChofer': nombreOperador,
-            'folio': folio,
-            'matriculaCamion': matriculaCamion,
-            'fecha': DateTime.now().toIso8601String(),
-            'hora': DateFormat('HH:mm').format(DateTime.now()),
-            'tipo': 'Eliminación de agenda',
-          });
-
+                          'idChofer': nombreOperador,
+                           'folio': folio,
+                             'matriculaCamion': matriculaCamion,
+                               'fecha': DateFormat('dd/MM/yy').format(DateTime.now()),
+                                     'hora': DateFormat('HH:mm').format(DateTime.now()),
+                                           'tipo': tipo,
+                                              });
+                                              
           // Eliminar la agenda
           await Agendas.doc(agendaDoc.id).delete();
         } else {
@@ -170,16 +170,7 @@ Future<bool> agregarObservacionVigilante(ObservacionVigilante observacionVigilan
     }
     return camiones;
   }
-//   Future<void> eliminarAgenda(String folio) async {
-//   try {
-//     QuerySnapshot querySnapshot = await Agendas.where('folio', isEqualTo: folio).get();
-//     if (querySnapshot.docs.isNotEmpty) {
-//       await Agendas.doc(querySnapshot.docs[0].id).delete();
-//     }
-//   } catch (e) {
-//     print('Error al eliminar la agenda: $e');
-//   }
-// }
+  
 
 
 

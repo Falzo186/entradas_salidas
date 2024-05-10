@@ -7,7 +7,8 @@ import 'Vista_ActualizarProductoAlmacen.dart'; // Asegúrate de que el nombre de
 
 
 class Almacen extends StatefulWidget {
-  const Almacen({super.key});
+  final String usuario;
+  const Almacen({super.key, required this.usuario});
 
  @override
  _AlmacenState createState() => _AlmacenState();
@@ -98,7 +99,7 @@ Future<void> cargarProductos() async {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Altas()),
+                    MaterialPageRoute(builder: (context) => Altas(usuario: widget.usuario)),
                   );
                 },
               ),
@@ -109,7 +110,7 @@ Future<void> cargarProductos() async {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Bajas()),
+                    MaterialPageRoute(builder: (context) => Bajas(usuario: widget.usuario)),
                   );
                 },
               ),

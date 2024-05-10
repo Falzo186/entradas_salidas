@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 
 class Altas extends StatefulWidget {
-  const Altas({Key? key}) : super(key: key);
+  final String usuario;
+  const Altas({Key? key, required this.usuario}) : super(key: key);
 
   @override
   State<Altas> createState() => _AltasState();
@@ -154,7 +155,7 @@ class _AltasState extends State<Altas> {
                     proveedor: proveedorController.text,
                   );
 
-                  if (await controlador.agregarProducto(producto)) {
+                  if (await controlador.agregarProducto(producto,widget.usuario)) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text('Producto agregado correctamente'),

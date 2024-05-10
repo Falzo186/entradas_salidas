@@ -5,7 +5,8 @@ import 'package:entradas_salidas/Vista/Vista_DetallesSalidaCamiones.dart';
 import 'package:flutter/material.dart';
 
 class VistaAgenda extends StatefulWidget {
-  const VistaAgenda({super.key});
+  final String usuario;
+  const VistaAgenda({super.key, required this.usuario});
 
 
   @override
@@ -80,7 +81,7 @@ Future<void> _cargarAgenda() async {
                           context,
                           MaterialPageRoute(
                             
-                            builder: (context) => DetalleEntradaCamion(entrada: entradasProgramadas[index]),
+                            builder: (context) => DetalleEntradaCamion(entrada: entradasProgramadas[index],usuario: widget.usuario),
                           ),
                         );
                       },
@@ -107,7 +108,7 @@ Future<void> _cargarAgenda() async {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DetalleSalidaCamion(salida: salidasProgramadas[index]),
+                            builder: (context) => DetalleSalidaCamion(salida: salidasProgramadas[index],usuario: widget.usuario),
                           ),
                         );
                       },

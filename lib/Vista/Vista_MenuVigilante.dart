@@ -6,7 +6,9 @@ import 'package:entradas_salidas/Vista/Vista_Camion.dart';
 import 'package:entradas_salidas/Vista/Vista_Operador.dart';
 import 'package:flutter/material.dart';
 class MenuVigilante extends StatefulWidget {
-  const MenuVigilante({Key? key}) : super(key: key);
+  final  String usuario;
+  const MenuVigilante({Key? key, required this.usuario}) : super(key: key);
+
 
   @override
   State<MenuVigilante> createState() => _MenuVigilanteState();
@@ -234,7 +236,7 @@ Widget build(BuildContext context) {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const VistaAgenda()),
+                        MaterialPageRoute(builder: (context) => VistaAgenda(usuario: widget.usuario)),
                       );
                     },
                   ),

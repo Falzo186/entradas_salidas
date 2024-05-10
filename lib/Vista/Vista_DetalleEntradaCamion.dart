@@ -3,11 +3,17 @@ import 'package:entradas_salidas/Modelo/AgendaReturn.dart';
 import 'package:entradas_salidas/Vista/EntryChecklistScreen.dart';
 import 'package:flutter/material.dart';
 
-class DetalleEntradaCamion extends StatelessWidget {
+class DetalleEntradaCamion extends StatefulWidget {
   final Agenda2 entrada;
+  final String usuario;
 
-  const DetalleEntradaCamion({super.key, required this.entrada});
+  const DetalleEntradaCamion({super.key, required this.entrada, required this.usuario});
 
+  @override
+  State<DetalleEntradaCamion> createState() => _DetalleEntradaCamionState();
+}
+
+class _DetalleEntradaCamionState extends State<DetalleEntradaCamion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,13 +45,13 @@ class DetalleEntradaCamion extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Folio: ${entrada.folio}'),
-            Text('Camión: ${entrada.matriculaCamion}'),
-            Text('Nombre del Conductor: ${entrada.nombreOperador}'),
-            Text( 'Fecha: ${entrada.fecha}'),
-            Text('Tipo de Carga: ${entrada.tipodeCarga}'),
-            Text('Peso de Carga: ${entrada.pesoCarga}'),
-            Text('Destino de Carga: ${entrada.destinoCarga}'),
+            Text('Folio: ${widget.entrada.folio}'),
+            Text('Camión: ${widget.entrada.matriculaCamion}'),
+            Text('Nombre del Conductor: ${widget.entrada.nombreOperador}'),
+            Text( 'Fecha: ${widget.entrada.fecha}'),
+            Text('Tipo de Carga: ${widget.entrada.tipodeCarga}'),
+            Text('Peso de Carga: ${widget.entrada.pesoCarga}'),
+            Text('Destino de Carga: ${widget.entrada.destinoCarga}'),
             
           ],
         ),
@@ -55,7 +61,7 @@ class DetalleEntradaCamion extends StatelessWidget {
            Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => EntryChecklistScreen(entrada: entrada),
+                            builder: (context) => EntryChecklistScreen(entrada: widget.entrada,usuario: widget.usuario),
                           ),
                         );
         },

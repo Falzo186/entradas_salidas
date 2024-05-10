@@ -205,35 +205,39 @@ class _LoginPageState extends State<LoginPage> {
                         Container(
                           child: ElevatedButton(
                             onPressed: () async {
+                               String usuario = _emailController.text;
                               if (await controlador.loginAndGetTipoUsuario(
                                       _emailController.text,
                                       _passwordController.text) ==
                                   1) {
                                 Navigator.of(context, rootNavigator: true).push(
                                   MaterialPageRoute(
-                                    builder: (context) => const Inicio(),
+                                    builder: (context) => Inicio( usuario: usuario),
                                   ),
                                 );
+                                 dispose();
                               } else if (await controlador.loginAndGetTipoUsuario(
                                       _emailController.text,
                                       _passwordController.text) ==
                                   2) {
                                 Navigator.of(context, rootNavigator: true).push(
                                   MaterialPageRoute(
-                                    builder: (context) => MenuVigilante(),
+                                    builder: (context) => MenuVigilante(usuario: usuario),
                                   ),
                                 );
+                                 dispose();
                               } else if (await controlador.loginAndGetTipoUsuario(
                                       _emailController.text,
                                       _passwordController.text) ==
                                   3) {
                                 Navigator.of(context, rootNavigator: true).push(
                                   MaterialPageRoute(
-                                    builder: (context) => VistaAdmin(),
+                                    builder: (context) => VistaAdmin(usuario: usuario),
                                   ),
                                 );
+                                 dispose();
                               }
-                              dispose();
+                             
                             },
                             style: ButtonStyle(
                               backgroundColor:

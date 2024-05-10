@@ -19,7 +19,7 @@ class ControladorAlmacen {
     }
   }
 
-  Future<bool> agregarProducto(Almacenobjeto producto) async {
+  Future<bool> agregarProducto(Almacenobjeto producto,String Encargado) async {
   try {
     DocumentSnapshot doc = await _almacenCollection.doc(producto.folio).get();
     if (doc.exists) {
@@ -35,7 +35,7 @@ class ControladorAlmacen {
         Cantidad: producto.cantidad.toString(),
         Fecha: formattedDate,
         Usuario: '-------------', // Aquí debes colocar el nombre del usuario actual
-        Encargado: 'nombre_encargado', // Aquí debes colocar el nombre del encargado
+        Encargado: Encargado, // Aquí debes colocar el nombre del encargado
       );
       await agregarRegistro(registro);
       return true;
@@ -50,7 +50,7 @@ class ControladorAlmacen {
         Cantidad: producto.cantidad.toString(),
         Fecha: formattedDate,
         Usuario: '-------------', // Aquí debes colocar el nombre del usuario actual
-        Encargado: 'nombre_encargado', // Aquí debes colocar el nombre del encargado
+        Encargado: Encargado, // Aquí debes colocar el nombre del encargado
       );
       await agregarRegistro(registro);
       return true;
@@ -61,7 +61,7 @@ class ControladorAlmacen {
   }
 }
 
-Future<bool> eliminarProducto(String folio, int cantidad, String usuario) async {
+Future<bool> eliminarProducto(String folio, int cantidad, String usuario,String Encargado) async {
   try {
     DocumentSnapshot doc = await _almacenCollection.doc(folio).get();
     if (doc.exists) {
@@ -81,7 +81,7 @@ Future<bool> eliminarProducto(String folio, int cantidad, String usuario) async 
         Cantidad: cantidad.toString(),
         Fecha: formattedDate,
         Usuario: usuario, // Aquí debes colocar el nombre del usuario actual
-        Encargado: 'nombre_encargado', // Aquí debes colocar el nombre del encargado
+        Encargado: Encargado, // Aquí debes colocar el nombre del encargado
       );
       await agregarRegistro(registro);
       return true;

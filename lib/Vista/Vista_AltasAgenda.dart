@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class VistaAltaAgenda extends StatefulWidget {
-  const VistaAltaAgenda({Key? key}) : super(key: key);
+  const VistaAltaAgenda({super.key});
 
   @override
   _VistaAltaAgendaState createState() => _VistaAltaAgendaState();
@@ -28,6 +28,7 @@ class _VistaAltaAgendaState extends State<VistaAltaAgenda> {
     );
 
     if (fechaSeleccionada != null) {
+      // ignore: use_build_context_synchronously
       final TimeOfDay? horaSeleccionada = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.now(),
@@ -65,7 +66,7 @@ class _VistaAltaAgendaState extends State<VistaAltaAgenda> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Éxito'),
-            content: const Text('Agenda agregada a Firestore correctamente'),
+            content: const Text('Agenda agregada correctamente'),
             actions: [
               TextButton(
                 onPressed: () {
@@ -106,7 +107,7 @@ class _VistaAltaAgendaState extends State<VistaAltaAgenda> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Agregar Agenda', style: TextStyle(color: Color.fromARGB(255, 255, 253, 253))),
+        title: const Text('Altas Agenda', style: TextStyle(color: Color.fromARGB(255, 255, 253, 253))),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white),
           onPressed: () {
@@ -114,19 +115,19 @@ class _VistaAltaAgendaState extends State<VistaAltaAgenda> {
           },
         ),
         centerTitle: true,
-        toolbarHeight: 80,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color.fromARGB(255, 15, 58, 47),
-                Color.fromARGB(255, 52, 174, 190),
-              ],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-            ),
+      toolbarHeight: 80,
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 15, 58, 47),
+              Color.fromARGB(255, 52, 174, 190),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
           ),
         ),
+      ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -142,13 +143,13 @@ class _VistaAltaAgendaState extends State<VistaAltaAgenda> {
                 ),
               ),
               const SizedBox(height: 10),
-              TextField(
-                controller: _folioController, // Asignar el controlador
-                decoration: InputDecoration(
+               TextField(
+                controller: _folioController,
+                decoration: const InputDecoration(
                   hintText: 'Ingrese folio',
                   border: OutlineInputBorder(),
+                  ),
                 ),
-              ),
               const SizedBox(height: 20),
               const Text(
                 'Matrícula del Camión:',
@@ -159,39 +160,44 @@ class _VistaAltaAgendaState extends State<VistaAltaAgenda> {
               ),
               const SizedBox(height: 10),
               TextField(
-                controller: _matriculaCamionController, // Asignar el controlador
-                decoration: InputDecoration(
+                controller: _matriculaCamionController,
+                decoration: const InputDecoration(
                   hintText: 'Ingrese la matrícula del camión',
                   border: OutlineInputBorder(),
+                  ),
                 ),
-              ),
               const SizedBox(height: 20),
-              const Text(
+               const Text(
                 'Nombre del Operador:',
                 style: TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              const SizedBox(height: 10),
               TextField(
-                controller: _nombreOperadorController, // Asignar el controlador
-                decoration: InputDecoration(
+                controller: _nombreOperadorController,
+                decoration: const InputDecoration(
                   hintText: 'Ingrese el nombre del operador',
                   border: OutlineInputBorder(),
+                  ),
                 ),
-              ),
               const SizedBox(height: 20),
               Text('Fecha y Hora Seleccionada: $_fechaHoraSeleccionada'),
               const SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () => _seleccionarFechaHora(context),
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.black,
-                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
-                ),
-                child: const Text('Seleccionar Fecha y Hora'),
-              ),
+              Align(
+  alignment: Alignment.centerLeft,
+  child: ElevatedButton(
+    onPressed: () => _seleccionarFechaHora(context),
+    style: ElevatedButton.styleFrom(
+      foregroundColor: Colors.white,
+      backgroundColor: Colors.black,
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+    ),
+    child: const Text('Seleccionar Fecha y Hora'),
+  ),
+),
+
               DropdownButton<String>(
                 value: _tipoSeleccionado,
                 onChanged: (String? newValue) {
@@ -208,7 +214,7 @@ class _VistaAltaAgendaState extends State<VistaAltaAgenda> {
               ),
               const SizedBox(height: 10.0),
               TextField(
-                controller: _tipoDeCargaController, // Asignar el controlador
+                controller: _tipoDeCargaController,
                 decoration: const InputDecoration(
                   hintText: 'Tipo de Carga',
                   border: OutlineInputBorder(),
@@ -216,7 +222,7 @@ class _VistaAltaAgendaState extends State<VistaAltaAgenda> {
               ),
               const SizedBox(height: 10.0),
               TextField(
-                controller: _pesoCargaController, // Asignar el controlador
+                controller: _pesoCargaController,
                 decoration: const InputDecoration(
                   hintText: 'Peso de Carga',
                   border: OutlineInputBorder(),
@@ -224,7 +230,7 @@ class _VistaAltaAgendaState extends State<VistaAltaAgenda> {
               ),
               const SizedBox(height: 10.0),
               TextField(
-                controller: _destinoCargaController, // Asignar el controlador
+                controller: _destinoCargaController,
                 decoration: const InputDecoration(
                   hintText: 'Destino de Carga',
                   border: OutlineInputBorder(),
@@ -232,14 +238,15 @@ class _VistaAltaAgendaState extends State<VistaAltaAgenda> {
               ),
               const SizedBox(height: 10.0),
               ElevatedButton(
-                onPressed: _agregarAgenda,
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.black,
-                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
-                ),
-                child: const Text('Agregar Agenda'),
-              ),
+  onPressed: _agregarAgenda,
+  style: ElevatedButton.styleFrom(
+    foregroundColor: Colors.white, 
+    backgroundColor: Colors.black,
+    padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+  ),
+  child: const Text('Agregar Agenda'),
+),
+
             ],
           ),
         ),

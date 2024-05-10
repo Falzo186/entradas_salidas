@@ -3,11 +3,17 @@ import 'package:entradas_salidas/Modelo/AgendaReturn.dart';
 import 'package:entradas_salidas/Vista/ExitChecklistScreen.dart';
 import 'package:flutter/material.dart';
 
-class DetalleSalidaCamion extends StatelessWidget {
+class DetalleSalidaCamion extends StatefulWidget {
   final Agenda2 salida;
+  final String usuario;
 
-  const DetalleSalidaCamion({super.key, required this.salida});
+  const DetalleSalidaCamion({super.key, required this.salida, required this.usuario});
 
+  @override
+  State<DetalleSalidaCamion> createState() => _DetalleSalidaCamionState();
+}
+
+class _DetalleSalidaCamionState extends State<DetalleSalidaCamion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,13 +45,13 @@ class DetalleSalidaCamion extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Folio: ${salida.folio}'),
-            Text('Camión: ${salida.matriculaCamion}'),
-            Text('Nombre del Conductor: ${salida.nombreOperador}'),
-            Text( 'Fecha: ${salida.fecha}'),
-            Text('Tipo de Carga: ${salida.tipodeCarga}'),
-            Text('Peso de Carga: ${salida.pesoCarga}'),
-            Text('Destino de Carga: ${salida.destinoCarga}'),
+            Text('Folio: ${widget.salida.folio}'),
+            Text('Camión: ${widget.salida.matriculaCamion}'),
+            Text('Nombre del Conductor: ${widget.salida.nombreOperador}'),
+            Text( 'Fecha: ${widget.salida.fecha}'),
+            Text('Tipo de Carga: ${widget.salida.tipodeCarga}'),
+            Text('Peso de Carga: ${widget.salida.pesoCarga}'),
+            Text('Destino de Carga: ${widget.salida.destinoCarga}'),
           ],
         ),
       ),
@@ -54,7 +60,7 @@ class DetalleSalidaCamion extends StatelessWidget {
            Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ExitChecklistScreen(salida: salida),
+                            builder: (context) => ExitChecklistScreen(salida: widget.salida,usuario: widget.usuario),
                           ),
                         );
         },

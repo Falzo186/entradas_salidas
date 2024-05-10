@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 
 class EntryChecklistScreen extends StatefulWidget {
   final Agenda2 entrada;
-  const EntryChecklistScreen({super.key, required this.entrada});
+  final String usuario;
+  const EntryChecklistScreen({super.key, required this.entrada, required this.usuario});
 
   @override
   _EntryChecklistScreenState createState() => _EntryChecklistScreenState();
@@ -165,12 +166,12 @@ class _EntryChecklistScreenState extends State<EntryChecklistScreen> {
                         fecha: widget.entrada.fecha,
                         hora: widget.entrada.hora,
                         tipo: 'Entrada',
-                        VigilanteAsignado: 'Vigilante asignado',
+                        VigilanteAsignado: widget.usuario,
                         Estado: 'Aceptado',
                         Motivo: 'Cumplimiento de checklist, todos los elementos revisados \n revise el panel de observaciones para mas detalles',
                       ),
                     )){
-                    await controlador.eliminarAgenda(widget.entrada.folio,widget.entrada.nombreOperador,false);
+                    await controlador.eliminarAgenda(widget.entrada.folio,widget.entrada.nombreOperador,false,'Entrada');
                     await controlador.agregarObservacionVigilante(
                       ObservacionVigilante(
                         folio: widget.entrada.folio,
@@ -296,12 +297,12 @@ class _EntryChecklistScreenState extends State<EntryChecklistScreen> {
                         fecha: widget.entrada.fecha,
                         hora: widget.entrada.hora,
                         tipo: 'Entrada',
-                        VigilanteAsignado: 'Vigilante asignado',
+                        VigilanteAsignado: widget.usuario,
                         Estado: 'Negado',
                         Motivo: checklistPendiente,
                       ),
                     )){
-                  await controlador.eliminarAgenda(widget.entrada.folio,widget.entrada.nombreOperador,true);
+                  await controlador.eliminarAgenda(widget.entrada.folio,widget.entrada.nombreOperador,true,'Entrada');
                     await controlador.agregarObservacionVigilante(
                       ObservacionVigilante(
                         folio: widget.entrada.folio,

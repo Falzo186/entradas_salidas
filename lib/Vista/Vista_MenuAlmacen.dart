@@ -1,4 +1,5 @@
 // Inicio.dart
+import 'package:entradas_salidas/Modelo/Usuario.dart';
 import 'package:entradas_salidas/Vista/Vista_AltaFacturas.dart';
 import 'package:entradas_salidas/Vista/Vista_ConsultaAlmacen.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,8 @@ import 'Vista_Almacen.dart';
 import 'Vista_AlmacenReportes.dart';
 
 class Inicio extends StatefulWidget {
-  const Inicio({super.key});
+  final String usuario;
+  const Inicio({super.key, required this.usuario});
 
   @override
   _InicioState createState() => _InicioState();
@@ -83,7 +85,7 @@ Widget build(BuildContext context) {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const Almacen()),
+                              MaterialPageRoute(builder: (context) => Almacen(usuario: widget.usuario)),
                             );
                           },
                           style: ElevatedButton.styleFrom(

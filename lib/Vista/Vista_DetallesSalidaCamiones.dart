@@ -6,13 +6,33 @@ import 'package:flutter/material.dart';
 class DetalleSalidaCamion extends StatelessWidget {
   final Agenda2 salida;
 
-  DetalleSalidaCamion({required this.salida});
+  const DetalleSalidaCamion({super.key, required this.salida});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Detalle de Salida'),
+        title: const Text('Detalles de Salida', style: TextStyle(color: Color.fromARGB(255, 255, 253, 253))),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        centerTitle: true,
+      toolbarHeight: 80,
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 15, 58, 47),
+              Color.fromARGB(255, 52, 174, 190),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
+      ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -38,8 +58,8 @@ class DetalleSalidaCamion extends StatelessWidget {
                           ),
                         );
         },
-        child: Icon(Icons.check),
         backgroundColor: Colors.green,
+        child: const Icon(Icons.check),
       ),
     );
   }

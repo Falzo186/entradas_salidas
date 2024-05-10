@@ -20,6 +20,7 @@ class _AltasState extends State<Altas> {
   final medicionController = TextEditingController();
   final proveedorController = TextEditingController();
 
+  @override
   void dispose() {
     folioController.clear();
     nombreController.clear();
@@ -33,7 +34,28 @@ class _AltasState extends State<Altas> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Altas'),
+        title: const Text('Altas', style: TextStyle(color: Color.fromARGB(255, 255, 253, 253), 
+        fontSize: 25)),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        centerTitle: true,
+      toolbarHeight: 80,
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 15, 58, 47),
+              Color.fromARGB(255, 52, 174, 190),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
+      ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -50,8 +72,8 @@ class _AltasState extends State<Altas> {
               TextField(
                 controller: folioController,
                 decoration: const InputDecoration(
-                  labelText: 'Folio',
-                  border: const OutlineInputBorder(),
+                  labelText: 'Ingrese folio',
+                  border: OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16),
@@ -63,7 +85,7 @@ class _AltasState extends State<Altas> {
               TextField(
                 controller: nombreController,
                 decoration: const InputDecoration(
-                  labelText: 'Nombre',
+                  labelText: 'Ingrese nombre del producto',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -76,7 +98,7 @@ class _AltasState extends State<Altas> {
               TextField(
                 controller: cantidadController,
                 decoration: const InputDecoration(
-                  labelText: 'Cantidad',
+                  labelText: 'Ingrese la cantidad',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -89,7 +111,7 @@ class _AltasState extends State<Altas> {
               TextField(
                 controller: marcaController,
                 decoration: const InputDecoration(
-                  labelText: 'Marca',
+                  labelText: 'Ingrese marca',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -102,7 +124,7 @@ class _AltasState extends State<Altas> {
               TextField(
                 controller: medicionController,
                 decoration: const InputDecoration(
-                  labelText: 'Medición',
+                  labelText: 'Ingrese la medida',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -115,12 +137,12 @@ class _AltasState extends State<Altas> {
               TextField(
                 controller: proveedorController,
                 decoration: const InputDecoration(
-                  labelText: 'Proveedor',
+                  labelText: 'Ingrese el proveedor',
                   border: OutlineInputBorder(),
                 ),
               ),
 
-              const SizedBox(height: 16),
+              const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () async {
                   Almacenobjeto producto = Almacenobjeto(
@@ -148,11 +170,15 @@ class _AltasState extends State<Altas> {
                   dispose();
                 },
                 style: ElevatedButton.styleFrom(
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero,
-                  ),
+                foregroundColor: Colors.white, 
+                backgroundColor: Colors.black,
+                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
                 ),
-                child: const Text('Agregar'),
+                child: const Text(
+                  'Agregar',
+                  style: TextStyle(
+                    fontSize: 15),
+                    ),
               ),
             ],
           ),

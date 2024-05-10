@@ -1,4 +1,3 @@
-import 'package:entradas_salidas/Vista/Vista_AltafechayhoraEjemplo.dart';
 import 'package:entradas_salidas/Vista/Vista_AltasAgenda.dart';
 import 'package:entradas_salidas/Vista/Vista_GestionUsuarios.dart';
 import 'package:entradas_salidas/Vista/Vista_MenuAlmacen.dart';
@@ -6,6 +5,8 @@ import 'package:entradas_salidas/Vista/Vista_MenuVigilante.dart';
 import 'package:flutter/material.dart';
 
 class VistaAdmin extends StatefulWidget {
+  const VistaAdmin({super.key});
+
   @override
   State<VistaAdmin> createState() => _VistaAdminState();
 }
@@ -34,7 +35,7 @@ Widget build(BuildContext context) {
                 alignment: Alignment.bottomCenter,
                 child: Padding(
                   padding: EdgeInsets.only(
-                    bottom: 140,
+                    bottom: 160,
                     right: 0,
                   ),
                   child: Text(
@@ -116,7 +117,7 @@ Widget build(BuildContext context) {
                         onPressed: () {
                           Navigator.of(context, rootNavigator: true).push(
                             MaterialPageRoute(
-                              builder: (context) =>  MenuVigilante(),
+                              builder: (context) =>   MenuVigilante(),
                             ),
                           );
                         },
@@ -159,7 +160,7 @@ Widget build(BuildContext context) {
                         onPressed: () {
                           Navigator.of(context, rootNavigator: true).push(
                             MaterialPageRoute(
-                              builder: (context) =>  VistaAltaAgenda(),
+                              builder: (context) =>   VistaAltaAgenda(),
                             ),
                           );
 
@@ -203,7 +204,7 @@ Widget build(BuildContext context) {
                         onPressed: () {
                           Navigator.of(context, rootNavigator: true).push(
                             MaterialPageRoute(
-                              builder: (context) =>  VistaGestionUsuario(),
+                              builder: (context) =>   VistaGestionUsuario(),
                             ),
                           );
                         },
@@ -244,7 +245,7 @@ Widget build(BuildContext context) {
           ),
         ),
         Positioned(
-          top: MediaQuery.of(context).padding.top + 135,
+          top: MediaQuery.of(context).padding.top + 155,
           right: 30,
           child: Container(
             decoration: BoxDecoration(

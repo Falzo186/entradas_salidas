@@ -140,7 +140,7 @@ class _EntryChecklistScreenState extends State<EntryChecklistScreen> {
                 controller: observacionesController,
                 decoration: const InputDecoration(
                   labelText: 'Observaciones',
-                  border: const OutlineInputBorder(),
+                  border: OutlineInputBorder(),
                 ),
                 maxLines: 3,
               ),
@@ -167,10 +167,16 @@ class _EntryChecklistScreenState extends State<EntryChecklistScreen> {
                         tipo: 'Entrada',
                         VigilanteAsignado: 'Vigilante asignado',
                         Estado: 'Aceptado',
-                        Motivo: 'Cumplimiento de checklist, todos los elementos revisados,revice el panel de observaciones para mas detalles',
+                        Motivo: 'Cumplimiento de checklist, todos los elementos revisados \n revise el panel de observaciones para mas detalles',
                       ),
                     )){
                     await controlador.eliminarAgenda(widget.entrada.folio);
+                    await controlador.agregarObservacionVigilante(
+                      ObservacionVigilante(
+                        folio: widget.entrada.folio,
+                        observacion: observacionesController.text, // Add this line
+                      ),
+                    );
                     // ignore: use_build_context_synchronously
                     showDialog(
                       context: context,
@@ -190,36 +196,36 @@ class _EntryChecklistScreenState extends State<EntryChecklistScreen> {
                       },
                     );}
                   } else {
-                    String checklistPendiente = 'CheckList pendiente\n';
+                    String checklistPendiente = '-CheckList pendiente\n';
                     if (!neumaticosRevisados) {
-                      checklistPendiente += 'Neumáticos\n';
+                      checklistPendiente += '-Neumáticos\n';
                     }
                     if (!frenosRevisados) {
-                      checklistPendiente += 'Frenos\n';
+                      checklistPendiente += '-Frenos\n';
                     }
                     if (!lucesRevisadas) {
-                      checklistPendiente += 'Luces\n';
+                      checklistPendiente += '-Luces\n';
                     }
                     if (!fluidosRevisados) {
-                      checklistPendiente += 'Fluidos\n';
+                      checklistPendiente += '-Fluidos\n';
                     }
                     if (!claxonRevisado) {
-                      checklistPendiente += 'Claxon\n';
+                      checklistPendiente += '-Claxon\n';
                     }
                     if (!espejosRevisados) {
-                      checklistPendiente += 'Espejos\n';
+                      checklistPendiente += '-Espejos\n';
                     }
                     if (!cinturonesSeguridadRevisados) {
-                      checklistPendiente += 'Cinturones de seguridad\n';
+                      checklistPendiente += '-Cinturones de seguridad\n';
                     }
                     if (!limpiaparabrisasRevisados) {
-                      checklistPendiente += 'Limpiaparabrisas\n';
+                      checklistPendiente += '-Limpiaparabrisas\n';
                     }
                     if (!kitEmergenciaRevisado) {
-                      checklistPendiente += 'Kit de emergencia\n';
+                      checklistPendiente += '-Kit de emergencia\n';
                     }
                     if (!documentacionRevisada) {
-                      checklistPendiente += 'Documentación\n';
+                      checklistPendiente += '-Documentación\n';
                     }
                     setState(() {
                       cadena = checklistPendiente;
@@ -247,37 +253,37 @@ class _EntryChecklistScreenState extends State<EntryChecklistScreen> {
                       documentacionRevisada) {
                     // Acción para guardar la entrada
                   } else {
-                    String checklistPendiente = ' Check list pendiente,revice el panel de \n';
-                    checklistPendiente += 'no se completo el check list de:\n';
+                    String checklistPendiente = 'Check list pendiente,revise el panel de observaciones para mas detalles \n';
+                    checklistPendiente += 'No se completo el check list de:\n';
                     if (!neumaticosRevisados) {
-                      checklistPendiente += 'Neumáticos\n';
+                      checklistPendiente += '-Neumáticos\n';
                     }
                     if (!frenosRevisados) {
-                      checklistPendiente += 'Frenos\n';
+                      checklistPendiente += '-Frenos\n';
                     }
                     if (!lucesRevisadas) {
-                      checklistPendiente += 'Luces\n';
+                      checklistPendiente += '-Luces\n';
                     }
                     if (!fluidosRevisados) {
-                      checklistPendiente += 'Fluidos\n';
+                      checklistPendiente += '-Fluidos\n';
                     }
                     if (!claxonRevisado) {
-                      checklistPendiente += 'Claxon\n';
+                      checklistPendiente += '-Claxon\n';
                     }
                     if (!espejosRevisados) {
-                      checklistPendiente += 'Espejos\n';
+                      checklistPendiente += '-Espejos\n';
                     }
                     if (!cinturonesSeguridadRevisados) {
-                      checklistPendiente += 'Cinturones de seguridad\n';
+                      checklistPendiente += '-Cinturones de seguridad\n';
                     }
                     if (!limpiaparabrisasRevisados) {
-                      checklistPendiente += 'Limpiaparabrisas\n';
+                      checklistPendiente += '-Limpiaparabrisas\n';
                     }
                     if (!kitEmergenciaRevisado) {
-                      checklistPendiente += 'Kit de emergencia\n';
+                      checklistPendiente += '-Kit de emergencia\n';
                     }
                     if (!documentacionRevisada) {
-                      checklistPendiente += 'Documentación\n';
+                      checklistPendiente += '-Documentación\n';
                     }
                      if (await controlador.agregarReporteVigilante(
                       ReporteVigilante(
@@ -288,7 +294,7 @@ class _EntryChecklistScreenState extends State<EntryChecklistScreen> {
                         tipo: 'Entrada',
                         VigilanteAsignado: 'Vigilante asignado',
                         Estado: 'Negado',
-                        Motivo: 'Negación de entrada, no se completó el checklist\n$checklistPendiente',
+                        Motivo: checklistPendiente,
                       ),
                     )){
                   await controlador.eliminarAgenda(widget.entrada.folio);

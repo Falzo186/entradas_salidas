@@ -1,12 +1,12 @@
 import 'package:entradas_salidas/Controlador/Controlador_ReporteVigilante.dart';
 import 'package:entradas_salidas/Modelo/ReporteVigilante.dart';
+import 'package:entradas_salidas/Vista/Vista_ObservacionesVigilante.dart';
 import 'package:flutter/material.dart';
 
 
 class HistoryScreen extends StatefulWidget {
   
-
-    HistoryScreen({Key? key, });
+    const HistoryScreen({super.key, Key });
 
   @override
   State<HistoryScreen> createState() => _HistoryScreenState();
@@ -31,13 +31,44 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Historial'),
+        title: const Text('Historial', style: TextStyle(color: Color.fromARGB(255, 255, 253, 253))),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),actions: [
+          IconButton(
+            icon: const Icon(Icons.note, size: 30),
+            color: Colors.white,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>  vistaObservaciones()),
+              );
+            },
+          ),
+        ],
+        centerTitle: true,
+      toolbarHeight: 80,
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 15, 58, 47),
+              Color.fromARGB(255, 52, 174, 190),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
+      ),
       ),
       body: FutureBuilder<List<ReporteVigilante>>(
         future: historial,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
@@ -50,9 +81,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
               itemCount: historial.length,
               itemBuilder: (context, index) {
                 final entry = historial[index];
-                Color tileColor = Colors.white; // Por defecto
-
-                // colores según el tipo de entrada
+                Color tileColor = Colors.white; 
                 if (entry.Estado == 'Aceptado') {
                   tileColor = Colors.green;
                 } else if (entry.Estado == 'Negado') {
@@ -65,7 +94,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text('Detalles del Reporte'),
+                          title: const Text('Detalles del Reporte'),
                           content: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -85,7 +114,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              child: Text('Cerrar'),
+                              child: const Text('Cerrar'),
                             ),
                           ],
                         );

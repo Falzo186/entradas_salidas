@@ -130,7 +130,7 @@ class _ExitChecklistScreenState extends State<ExitChecklistScreen> {
                 controller: observacionesController,
                 decoration: const InputDecoration(
                   labelText: 'Observaciones',
-                  border: const OutlineInputBorder(),
+                  border: OutlineInputBorder(),
                 ),
                 maxLines: 3,
               ),
@@ -162,6 +162,12 @@ class _ExitChecklistScreenState extends State<ExitChecklistScreen> {
                       ),
                     )){
                     await controlador.eliminarAgenda(widget.salida.folio);
+                    await controlador.agregarObservacionVigilante(
+                      ObservacionVigilante(
+                        folio: widget.salida.folio,
+                        observacion: observacionesController.text, // Add this line
+                      ),
+                    );
                     // ignore: use_build_context_synchronously
                     showDialog(
                       context: context,

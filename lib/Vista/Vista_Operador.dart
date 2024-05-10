@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:entradas_salidas/Vista/Vista_DetallesOperador.dart';
 import '../Modelo/Operador.dart';
 
+
 class VistaOperador extends StatefulWidget {
   
 
-   VistaOperador({super.key});
+   const VistaOperador({super.key});
 
   @override
   State<VistaOperador> createState() => _VistaOperadorState();
@@ -33,20 +34,40 @@ Future<void> cargarOperadores() async {
   @override
  Widget build(BuildContext context) {
   return Scaffold(
-    appBar: AppBar(
-      title: const Text('Operadores'),
-      actions: [
+     appBar: AppBar(
+        title: const Text('Operadores', style: TextStyle(color: Color.fromARGB(255, 255, 253, 253))),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        actions: [
         IconButton(
-          icon: Icon(Icons.add),
+          icon: const Icon(Icons.add, color: Colors.white, size: 30),
           onPressed: () {
            Navigator.push(
        context,
-       MaterialPageRoute(builder: (context) => VistaAltasOperadores()) ) ;
+       MaterialPageRoute(builder: (context) => const VistaAltasOperadores()) ) ;
        
           },
         ),
       ],
-    ),
+        centerTitle: true,
+      toolbarHeight: 80,
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 15, 58, 47),
+              Color.fromARGB(255, 52, 174, 190),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
+      ),
+      ),
     body: ListView.separated(
       itemCount: _operadores.length,
       separatorBuilder: (BuildContext context, int index) => const Divider(),

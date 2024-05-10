@@ -1,7 +1,7 @@
 import 'package:entradas_salidas/Controlador/Controlador_Almacen.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
+
 
 class Bajas extends StatefulWidget {
   const Bajas({Key? key}) : super(key: key);
@@ -28,7 +28,28 @@ class _BajasState extends State<Bajas> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bajas'),
+        title: const Text('Bajas', style: TextStyle(color: Color.fromARGB(255, 255, 253, 253), 
+        fontSize: 25)),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        centerTitle: true,
+      toolbarHeight: 80,
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 15, 58, 47),
+              Color.fromARGB(255, 52, 174, 190),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
+      ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -45,7 +66,7 @@ class _BajasState extends State<Bajas> {
               TextField(
                 controller: folioController,
                 decoration: const InputDecoration(
-                  labelText: 'Folio',
+                  labelText: 'Ingrese folio',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -58,7 +79,7 @@ class _BajasState extends State<Bajas> {
               TextField(
                 controller: cantidadController,
                 decoration: const InputDecoration(
-                  labelText: 'Cantidad',
+                  labelText: 'Ingrese cantidad',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -71,11 +92,11 @@ class _BajasState extends State<Bajas> {
               TextField(
                 controller: usuarioController,
                 decoration: const InputDecoration(
-                  labelText: 'Usuario Despachado',
-                  border: const OutlineInputBorder(),
+                  labelText: 'Ingrese usuario Despachado',
+                  border: OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () async {
                   final folio = folioController.text;
@@ -97,11 +118,15 @@ class _BajasState extends State<Bajas> {
                   dispose();
                 },
                 style: ElevatedButton.styleFrom(
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero,
-                  ),
+                foregroundColor: Colors.white, 
+                backgroundColor: Colors.black,
+                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
                 ),
-                child: const Text('Agregar'),
+                child: const Text(
+                  'Agregar',
+                  style: TextStyle(
+                    fontSize: 15),
+                    ),
               ),
             ],
           ),

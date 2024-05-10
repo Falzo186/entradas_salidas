@@ -2,6 +2,7 @@ import 'package:entradas_salidas/Controlador/Controlador_camiones.dart';
 import 'package:entradas_salidas/Modelo/Camion.dart';
 import 'package:flutter/material.dart';
 
+
 class AltaCamionView extends StatefulWidget {
   const AltaCamionView({super.key});
 
@@ -10,7 +11,7 @@ class AltaCamionView extends StatefulWidget {
 }
 
 class _AltaCamionViewState extends State<AltaCamionView> {
-  ControladorCamiones _controlador = ControladorCamiones();
+  final ControladorCamiones _controlador = ControladorCamiones();
   final TextEditingController _matriculaController = TextEditingController();
   final TextEditingController _modeloController = TextEditingController();
   final TextEditingController _anoController = TextEditingController();
@@ -25,52 +26,173 @@ class _AltaCamionViewState extends State<AltaCamionView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Alta de Camión'),
+        title: const Text('Alta de Camión', style: TextStyle(color: Color.fromARGB(255, 255, 253, 253), 
+        fontSize: 25)),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        centerTitle: true,
+      toolbarHeight: 80,
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 15, 58, 47),
+              Color.fromARGB(255, 52, 174, 190),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
+      ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            TextField(
-              controller: _matriculaController,
-              decoration: const InputDecoration(labelText: 'Matrícula'),
+            const Text(
+                'Matrícula:',
+                style: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10),
+              const TextField(
+                decoration: InputDecoration(
+                  hintText: 'Ingrese la matrícula del camión',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 20),
+            const Text(
+                'Modelo',
+                style: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10),
+              const TextField(
+                decoration: InputDecoration(
+                  hintText: 'Ingrese el modelo',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Año de Fabricación:',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      TextField(
+                        controller: _anoController,
+                        decoration: const InputDecoration(
+                          labelText: 'Ingrese el año de fabricación',
+                          border: OutlineInputBorder(),
+                        ),
+                        keyboardType: TextInputType.number,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 20), // Espaciador entre los campos
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Kilometraje:',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      TextField(
+                        controller: _kilometrajeController,
+                        decoration: const InputDecoration(
+                          labelText: 'Ingrese el Kilometraje',
+                          border: OutlineInputBorder(),
+                        ),
+                        keyboardType: TextInputType.number,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            TextField(
-              controller: _modeloController,
-              decoration: const InputDecoration(labelText: 'Modelo'),
-            ),
-            TextField(
-              controller: _anoController,
-              decoration: const InputDecoration(labelText: 'Año de Fabricación'),
-              keyboardType: TextInputType.number,
-            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Compañía de Transporte:',
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+              ),
+              ), 
+            const SizedBox(height: 10),
             TextField(
               controller: _companiaController,
-              decoration: const InputDecoration(labelText: 'Compañía de Transporte'),
-            ),
-            TextField(
-              controller: _kilometrajeController,
-              decoration: const InputDecoration(labelText: 'Kilometraje'),
-              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(labelText: 'Ingrese Compañía de Transporte'
+              ,border: OutlineInputBorder(),),
             ),
             const SizedBox(height: 20.0),
-            Text('Último Servicio: ${_formatDate(_ultimoServicio)}'),
-            ElevatedButton(
-              onPressed: () {
-                _selectDate(context, _ultimoServicio).then((value) {
-                  if (value != null) {
-                    setState(() {
-                      _ultimoServicio = value;
-                    });
-                  }
+            Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    Text(
+      'Último Servicio: ${_formatDate(_ultimoServicio)}', 
+      textAlign: TextAlign.left, 
+    ),
+    const SizedBox(height: 10),
+    Row(
+      mainAxisAlignment: MainAxisAlignment.start, 
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            _selectDate(context, _ultimoServicio).then((value) {
+              if (value != null) {
+                setState(() {
+                  _ultimoServicio = value;
                 });
-              },
-              child: const Text('Seleccionar Último Servicio'),
-            ),
+              }
+            });
+          },
+          style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.white,
+            backgroundColor: Colors.black,
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+          ),
+          child: const Text('Seleccionar Último Servicio'),
+        ), 
+      ],
+    ),
+  ],
+),
             const SizedBox(height: 20.0),
-            Text('Próximo Servicio: ${_formatDate(_proximoServicio)}'),
-            ElevatedButton(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Próximo Servicio: ${_formatDate(_proximoServicio)}', 
+                  textAlign: TextAlign.left,),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start, 
+              children: [
+              ElevatedButton(
               onPressed: () {
                 _selectDate(context, _proximoServicio).then((value) {
                   if (value != null) {
@@ -80,7 +202,16 @@ class _AltaCamionViewState extends State<AltaCamionView> {
                   }
                 });
               },
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white, 
+                backgroundColor: Colors.black,
+                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                ),
               child: const Text('Seleccionar Próximo Servicio'),
+               ), 
+              ],
+                ),
+              ],
             ),
             const SizedBox(height: 20.0),
             ElevatedButton(
@@ -106,7 +237,12 @@ class _AltaCamionViewState extends State<AltaCamionView> {
                 //   );
                 // }
               },
-              child: const Text('Guardar Camión'),
+               style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white, 
+                backgroundColor: Colors.black,
+                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                ),
+              child: const Text('Guardar'),
             ),
           ],
         ),

@@ -3,11 +3,10 @@ import 'package:entradas_salidas/Modelo/Camion.dart';
 import 'package:entradas_salidas/Vista/HistoryScreen.dart';
 import 'package:entradas_salidas/Vista/Vista_Agenda.dart';
 import 'package:entradas_salidas/Vista/Vista_Camion.dart';
-import 'package:entradas_salidas/Vista/Vista_ObservacionesVigilante.dart';
 import 'package:entradas_salidas/Vista/Vista_Operador.dart';
 import 'package:flutter/material.dart';
 class MenuVigilante extends StatefulWidget {
-  MenuVigilante({Key? key}) : super(key: key);
+  const MenuVigilante({Key? key}) : super(key: key);
 
   @override
   State<MenuVigilante> createState() => _MenuVigilanteState();
@@ -60,22 +59,22 @@ Widget build(BuildContext context) {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      bottom: 130,
-                      left: 160,
-                    ),
-                    child: Text(
-                      'Menú\n                Vigilante',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                      ),
+                alignment: Alignment.bottomLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    bottom: 155,
+                    left: 150,
+                  ),
+                  child: Text(
+                    'Menú\n                Vigilante',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
                     ),
                   ),
                 ),
+              ),
               ],
             ),
           ),
@@ -148,7 +147,7 @@ Widget build(BuildContext context) {
                             Container(
                               alignment: AlignmentDirectional.centerStart,
                               child: const Text(
-                                '      Texto Adicional',
+                                ' Texto Adicional',
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
@@ -213,7 +212,7 @@ Widget build(BuildContext context) {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => VistaCamion()),
+                        MaterialPageRoute(builder: (context) => const VistaCamion()),
                       );
                     },
                   ),
@@ -224,7 +223,7 @@ Widget build(BuildContext context) {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => VistaOperador()),
+                        MaterialPageRoute(builder: (context) =>  VistaOperador()),
                       );
                     },
                   ),
@@ -235,7 +234,7 @@ Widget build(BuildContext context) {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => VistaAgenda()),
+                        MaterialPageRoute(builder: (context) => const VistaAgenda()),
                       );
                     },
                   ),
@@ -246,46 +245,46 @@ Widget build(BuildContext context) {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => HistoryScreen()),
+                        MaterialPageRoute(builder: (context) => const HistoryScreen()),
                       );
                     },
                   ),
-                   const SizedBox(width: 20),
-                  IconButton(
-                    icon: const Icon(Icons.note, size: 40),
-                    color: Colors.white,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => vistaObservaciones()),
-                      );
-                    },
-                  ),
+                  //  const SizedBox(width: 20),
+                  // IconButton(
+                  //   icon: const Icon(Icons.note, size: 40),
+                  //   color: Colors.white,
+                  //   onPressed: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(builder: (context) => const vistaObservaciones()),
+                  //     );
+                  //   },
+                  // ),
                 ],
               ),
             ),
           ),
           Positioned(
-            top: MediaQuery.of(context).padding.top + 100,
-            right: 15,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.black, width: 2),
-                color: Colors.black,
+          top: MediaQuery.of(context).padding.top + 110,
+          right: 30,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: Colors.black, width: 2),
+              color: Colors.black, // Color de fondo blanco
+            ),
+            child: IconButton(
+              icon: const Icon(
+                Icons.exit_to_app,
+                size: 30,
+                color: Colors.white,
               ),
-              child: IconButton(
-                icon: const Icon(
-                  Icons.exit_to_app,
-                  size: 30,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
           ),
+        ),
           Positioned(
             top: MediaQuery.of(context).padding.top - 55,
             left: 0,

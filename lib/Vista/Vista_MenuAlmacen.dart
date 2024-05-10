@@ -37,8 +37,8 @@ Widget build(BuildContext context) {
                 alignment: Alignment.bottomLeft,
                 child: Padding(
                   padding: EdgeInsets.only(
-                    bottom: 130,
-                    left: 160,
+                    bottom: 155,
+                    left: 150,
                   ),
                   child: Text(
                     'Menú\n                Almacen',
@@ -66,9 +66,9 @@ Widget build(BuildContext context) {
             ),
             child: Padding(
               padding: const EdgeInsets.only(
-                top: 60,
-                left: 40.0,
-                right: 40.0,
+                top: 100,
+                left: 20.0,
+                right: 20.0,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,8 +77,8 @@ Widget build(BuildContext context) {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.width * 0.4,
+                        width: MediaQuery.of(context).size.width * 0.43,
+                        height: MediaQuery.of(context).size.height * 0.27,
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.push(
@@ -91,32 +91,33 @@ Widget build(BuildContext context) {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             side: const BorderSide(color: Colors.grey),
+                            
                           ),
                           child: const Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
                                 Icons.store,
-                                size: 40,
+                                size: 70,
                                 color: Colors.black,
                               ),
                               SizedBox(height: 10),
                               Text(
                                 'Almacén',
-                                style: TextStyle(color: Colors.black),
+                                style: TextStyle(color: Colors.black, fontSize: 20),
                               ),
                             ],
                           ),
                         ),
                       ),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.width * 0.4,
+                        width: MediaQuery.of(context).size.width * 0.43,
+                        height: MediaQuery.of(context).size.height * 0.27,
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => AltaFactura()),
+                              MaterialPageRoute(builder: (context) =>  AltaFactura()),
                             );
                           },
                           style: ElevatedButton.styleFrom(
@@ -130,13 +131,13 @@ Widget build(BuildContext context) {
                             children: [
                               Icon(
                                 Icons.request_quote_sharp,
-                                size: 40,
+                                size: 70,
                                 color: Colors.black,
                               ),
                               SizedBox(height: 10),
                               Text(
                                 'Facturas',
-                                style: TextStyle(color: Colors.black),
+                                style: TextStyle(color: Colors.black, fontSize: 20),
                               ),
                             ],
                           ),
@@ -144,51 +145,56 @@ Widget build(BuildContext context) {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.width * 0.4,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => VistaConsultas()),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              side: const BorderSide(color: Colors.grey)),
-                          child: const Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.search,
-                                size: 40,
-                                color: Colors.black,
-                              ),
-                              SizedBox(height: 10),
-                              Text(
-                                'Catálogo de Productos',
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+  width: MediaQuery.of(context).size.width * 0.43,
+  height: MediaQuery.of(context).size.height * 0.27,
+  child: ElevatedButton(
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const VistaConsultas()),
+      );
+    },
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      side: const BorderSide(color: Colors.grey),
+    ),
+    child: const Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(height: 15),
+        Icon(
+          Icons.search,
+          size: 70,
+          color: Colors.black,
+        ),
+        SizedBox(height: 10),
+        Align(
+          alignment: Alignment.center,
+          child: Text(
+            'Catálogo de \n Productos',
+            style: TextStyle(color: Colors.black, fontSize: 20),
+          ),
+        ),
+      ],
+    ),
+  ),
+),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.width * 0.4,
+                        width: MediaQuery.of(context).size.width * 0.43,
+                        height: MediaQuery.of(context).size.height * 0.27,
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => VistaReportes()),
+                              MaterialPageRoute(builder: (context) => const VistaReportes()),
                             );
                           },
                           style: ElevatedButton.styleFrom(
@@ -202,13 +208,13 @@ Widget build(BuildContext context) {
                             children: [
                               Icon(
                                 Icons.receipt_long,
-                                size: 40,
+                                size: 70,
                                 color: Colors.black,
                               ),
                               SizedBox(height: 10),
                               Text(
                                 'Reportes',
-                                style: TextStyle(color: Colors.black),
+                                style: TextStyle(color: Colors.black, fontSize: 20),
                               ),
                             ],
                           ),
@@ -222,8 +228,8 @@ Widget build(BuildContext context) {
           ),
         ),
         Positioned(
-          top: MediaQuery.of(context).padding.top + 100,
-          right: 15,
+          top: MediaQuery.of(context).padding.top + 110,
+          right: 30,
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),

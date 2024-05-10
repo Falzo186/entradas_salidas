@@ -4,6 +4,8 @@ import 'package:entradas_salidas/Modelo/ReporteAlmacen.dart';
 import 'package:flutter/material.dart';
 
 class VistaReportes extends StatefulWidget {
+  const VistaReportes({super.key});
+
   @override
   State<VistaReportes> createState() => _VistaReportesState();
 }
@@ -11,7 +13,8 @@ class VistaReportes extends StatefulWidget {
 class _VistaReportesState extends State<VistaReportes> {
   List<ReporteAlmacen> reportes = [];
   ControladorAlmacen controlador = ControladorAlmacen();
-   void initState() {
+   @override
+  void initState() {
   super.initState();
   cargarReportes();
 }
@@ -29,7 +32,6 @@ Future<void> cargarReportes() async {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.black,
         title: const Text('Reportes', style: TextStyle(color: Color.fromARGB(255, 255, 253, 253))),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white),
@@ -37,18 +39,20 @@ Future<void> cargarReportes() async {
             Navigator.pop(context);
           },
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.add_outlined, size: 30),
-            color: Colors.white,
-            onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const AltaCamionView()),
-              // );
-            },
+        centerTitle: true,
+      toolbarHeight: 80,
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 15, 58, 47),
+              Color.fromARGB(255, 52, 174, 190),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
           ),
-        ],
+        ),
+      ),
       ),
       body: ListView(
         scrollDirection: Axis.vertical,
@@ -56,33 +60,43 @@ Future<void> cargarReportes() async {
           return GestureDetector(
             onTap: () {
               showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text('Especificaciones'),
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Tipo: ${objeto.tipo}'),
-                        Text('Nom. Producto: ${objeto.nomproducto}'),
-                        Text('Cantidad: ${objeto.Cantidad}'),
-                        Text('Fecha: ${objeto.Fecha}'),
-                        Text('Usuario: ${objeto.Usuario}'),
-                        Text('Encargado: ${objeto.Encargado}'),
-                      ],
-                    ),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text('Cerrar'),
-                      ),
-                    ],
-                  );
-                },
-              );
+  context: context,
+  builder: (BuildContext context) {
+    return Theme(
+      data: ThemeData(
+        // Cambia el color de fondo del diálogo aquí
+        colorScheme: Theme.of(context).colorScheme.copyWith(
+            background: Colors.grey,
+        ),),
+        child: Container(
+      child: AlertDialog(
+        title: const Text('Especificaciones', style: TextStyle(color: Colors.black)),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Tipo: ${objeto.tipo}', style: const TextStyle(color: Colors.black, fontSize: 20)),
+            Text('Nom. Producto: ${objeto.nomproducto}', style: const TextStyle(color: Colors.black, fontSize: 20)),
+            Text('Cantidad: ${objeto.Cantidad}', style: const TextStyle(color: Colors.black, fontSize: 20)),
+            Text('Fecha: ${objeto.Fecha}', style: const TextStyle(color: Colors.black, fontSize: 20)),
+            Text('Usuario: ${objeto.Usuario}', style: const TextStyle(color: Colors.black, fontSize: 20)),
+            Text('Encargado: ${objeto.Encargado}', style: const TextStyle(color: Colors.black, fontSize: 20)),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('Cerrar', style: TextStyle(color: Colors.black, fontSize: 20)),
+          ),
+        ],
+      ),
+    ),
+    );
+  },
+);
+
             },
             child: Container(
               width: 150.0,

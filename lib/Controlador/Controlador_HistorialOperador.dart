@@ -20,16 +20,6 @@ Future<List<InfraccionOperador>> getRegistroInFraccionesOperador(String idChofer
   }
   return registroInfracciones;
 }
-Future<void> agregarInfraccionAlcoholico() async {
-  String idChofer = '1'; 
-  String infraccion = 'Conducir bajo los efectos del alcohol'; 
-
-  await Infracciones.add({
-    'idChofer': idChofer,
-    'Infraccion': infraccion,
-  });
-}
-
 
 Future<List<HistorialOperador>> getHistorialOperador(String idChofer) async {
   List<HistorialOperador> historialOperador = [];

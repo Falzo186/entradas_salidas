@@ -63,11 +63,7 @@ Future<void> cargarReportes() async {
   context: context,
   builder: (BuildContext context) {
     return Theme(
-      data: ThemeData(
-        // Cambia el color de fondo del diálogo aquí
-        colorScheme: Theme.of(context).colorScheme.copyWith(
-            background: Colors.grey,
-        ),),
+      data: ThemeData.light(),
         child: Container(
       child: AlertDialog(
         title: const Text('Especificaciones', style: TextStyle(color: Colors.black)),

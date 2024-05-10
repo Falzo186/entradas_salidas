@@ -30,7 +30,6 @@ class ControladorCamiones {
         kilometraje: doc['kilometraje'],
         ultimoServicio: doc['ultimoServicio'],
         proximoServicio: doc['proximoServicio'],
-        historialCargas: doc['historialCargas'],
       ));
     }
     return camiones;

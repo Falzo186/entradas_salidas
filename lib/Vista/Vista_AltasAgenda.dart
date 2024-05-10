@@ -59,9 +59,46 @@ class _VistaAltaAgendaState extends State<VistaAltaAgenda> {
         'pesoCarga': _pesoCargaController.text,
         'destinoCarga': _destinoCargaController.text,
       });
-      print('Agenda agregada a Firestore correctamente');
+      // ignore: use_build_context_synchronously
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Éxito'),
+            content: const Text('Agenda agregada a Firestore correctamente'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Aceptar'),
+              ),
+            ],
+          );
+        },
+      );
     } catch (e) {
-      print('Error al agregar agenda a Firestore: $e');
+      // ignore: use_build_context_synchronously
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Error'),
+            content: Text('Error al agregar agenda : $e'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                  
+                },
+                child: const Text('Aceptar'),
+              ),
+            ],
+          );
+        },
+      );
     }
   }
 

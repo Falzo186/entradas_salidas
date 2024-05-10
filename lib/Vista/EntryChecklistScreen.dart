@@ -188,6 +188,10 @@ class _EntryChecklistScreenState extends State<EntryChecklistScreen> {
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                                
                               },
                               child: const Text('Aceptar'),
                             ),
@@ -315,6 +319,10 @@ class _EntryChecklistScreenState extends State<EntryChecklistScreen> {
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                                
                               },
                               child: const Text('cerrar'),
                             ),

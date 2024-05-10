@@ -179,6 +179,10 @@ class _ExitChecklistScreenState extends State<ExitChecklistScreen> {
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                                 Navigator.of(context).pop();
+                                 Navigator.of(context).pop();
+                                            
                               },
                               child: const Text('Aceptar'),
                             ),
@@ -301,6 +305,9 @@ class _ExitChecklistScreenState extends State<ExitChecklistScreen> {
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                                            Navigator.of(context).pop();
+                                            Navigator.of(context).pop();
                               },
                               child: const Text('cerrar'),
                             ),

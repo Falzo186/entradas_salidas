@@ -26,7 +26,7 @@ class _DetalleOperadorState extends State<DetalleOperador> {
  
 }
 Future<List<dynamic>> cargarHistorialOperador() async {
-  List<HistorialOperador> listaHistorialOperador = await controladorHistorial.getHistorialOperador(widget.operador.IdChofer);
+  List<HistorialOperador> listaHistorialOperador = await controladorHistorial.getHistorialOperador(widget.operador.nombre);
   List<InfraccionOperador> listaInfracciones = await controladorHistorial.getRegistroInFraccionesOperador(widget.operador.IdChofer);
   return [listaHistorialOperador, listaInfracciones];
 }

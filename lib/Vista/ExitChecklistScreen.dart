@@ -161,7 +161,7 @@ class _ExitChecklistScreenState extends State<ExitChecklistScreen> {
                         Motivo: 'Cumplimiento de checklist, todos los elementos revisados,revise el panel de observaciones para mas detalles',
                       ),
                     )){
-                    await controlador.eliminarAgenda(widget.salida.folio);
+                    await controlador.eliminarAgenda(widget.salida.folio,widget.salida.nombreOperador,true);
                     await controlador.agregarObservacionVigilante(
                       ObservacionVigilante(
                         folio: widget.salida.folio,
@@ -287,7 +287,7 @@ class _ExitChecklistScreenState extends State<ExitChecklistScreen> {
                         Motivo: 'Negación de Salida, no se completó el checklist\n$checklistPendiente',
                       ),
                     )){
-                  await controlador.eliminarAgenda(widget.salida.folio);
+                  await controlador.eliminarAgenda(widget.salida.folio,widget.salida.nombreOperador,false);
                     await controlador.agregarObservacionVigilante(
                       ObservacionVigilante(
                         folio: widget.salida.folio,

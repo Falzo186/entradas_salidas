@@ -13,7 +13,7 @@ final CollectionReference _camionesCollection =FirebaseFirestore.instance.collec
 final CollectionReference Historial = FirebaseFirestore.instance.collection('HistorialOperador');  
 
 
-Future<void> eliminarAgenda(String folio) async {
+Future<void> eliminarAgenda(String folio,String nombreOperador,bool enTransito) async {
   try {
     // Obtener la agenda a eliminar
     QuerySnapshot querySnapshot = await Agendas.where('folio', isEqualTo: folio).get();
@@ -42,6 +42,7 @@ Future<void> eliminarAgenda(String folio) async {
               _camionesCollection.doc(docId).update({
               'ultimoServicio': camion.proximoServicio,
               'proximoServicio': 'En espera',
+              'enTransito': enTransito,
               });
             } else {
               print('No se encontró el camión con la matrícula especificada');
@@ -49,7 +50,7 @@ Future<void> eliminarAgenda(String folio) async {
             });
           // Agregar el historial de operador
           await Historial.add({
-            'idChofer': agendaData['idChofer'],
+            'idChofer': nombreOperador,
             'folio': folio,
             'matriculaCamion': matriculaCamion,
             'fecha': DateTime.now().toIso8601String(),
@@ -99,78 +100,6 @@ Future<void> eliminarAgenda(String folio) async {
       proximoServicio: doc['proximoServicio'],
     );
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Future<void> eliminarAgenda(String folio) async {
-//   try {
-//     // Obtener la agenda a eliminar
-//     QuerySnapshot querySnapshot = await Agendas.where('folio', isEqualTo: folio).get();
-//     if (querySnapshot.docs.isNotEmpty) {
-//       // Obtener el documento de la agenda
-//       DocumentSnapshot agendaDoc = querySnapshot.docs[0];
-//       // Obtener los datos de la agenda
-//       Map<String, dynamic>? agendaData = agendaDoc.data() as Map<String, dynamic>?;
-
-//       if (agendaData != null) {
-//         // Obtener la matrícula del camión
-//         String matriculaCamion = agendaData['matriculaCamion'];
-//         print('Matrícula del camión: $matriculaCamion');
-//         // Actualizar el último servicio del camión
-//         await _camionesCollection.doc(matriculaCamion).update({
-//           'ultimoServicio': agendaData['proximoServicio'],
-//         });
-
-//         // Actualizar el próximo servicio del camión a 'En espera'
-//         await _camionesCollection.doc(matriculaCamion).update({
-//           'proximoServicio': 'En espera',
-//         });
-
-//         // Agregar el historial de operador
-//         await Historial.add({
-//           'idChofer': agendaData['idChofer'],
-//           'folio': folio,
-//           'matriculaCamion': matriculaCamion,
-//           'fecha': DateTime.now().toIso8601String(),
-//           'hora': DateFormat('HH:mm').format(DateTime.now()),
-//           'tipo': 'Eliminación de agenda',
-//         });
-
-//         // Eliminar la agenda
-//         await Agendas.doc(agendaDoc.id).delete();
-//       } else {
-//         print('No se encontró la agenda con el folio especificado');
-//       }
-//     }
-//   } catch (e) {
-//     print('Error al eliminar la agenda: $e');
-//   }
-// }
-
-
-
-
-
-
-
-
-
 
 
 

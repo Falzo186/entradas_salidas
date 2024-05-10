@@ -170,7 +170,7 @@ class _EntryChecklistScreenState extends State<EntryChecklistScreen> {
                         Motivo: 'Cumplimiento de checklist, todos los elementos revisados \n revise el panel de observaciones para mas detalles',
                       ),
                     )){
-                    await controlador.eliminarAgenda(widget.entrada.folio);
+                    await controlador.eliminarAgenda(widget.entrada.folio,widget.entrada.nombreOperador,false);
                     await controlador.agregarObservacionVigilante(
                       ObservacionVigilante(
                         folio: widget.entrada.folio,
@@ -301,7 +301,7 @@ class _EntryChecklistScreenState extends State<EntryChecklistScreen> {
                         Motivo: checklistPendiente,
                       ),
                     )){
-                  await controlador.eliminarAgenda(widget.entrada.folio);
+                  await controlador.eliminarAgenda(widget.entrada.folio,widget.entrada.nombreOperador,true);
                     await controlador.agregarObservacionVigilante(
                       ObservacionVigilante(
                         folio: widget.entrada.folio,

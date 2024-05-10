@@ -74,7 +74,7 @@ class _VistaAltasOperadoresState extends State<VistaAltasOperadores> {
               const SizedBox(height: 10),
               TextField(
                 controller: _nombreController, // Asignar el controlador al campo de texto
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Ingrese el nombre del operador',
                   border: OutlineInputBorder(),
                 ),
@@ -90,7 +90,7 @@ class _VistaAltasOperadoresState extends State<VistaAltasOperadores> {
               const SizedBox(height: 10),
               TextField(
                 controller: _idChoferController, // Asignar el controlador al campo de texto
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Ingrese la matrícula del camión',
                   border: OutlineInputBorder(),
                 ),
@@ -137,7 +137,7 @@ class _VistaAltasOperadoresState extends State<VistaAltasOperadores> {
                     ),
                     const SizedBox(height: 10),
                     TextField(
-                      controller: _estadoSaludController, // Asignar el controlador al campo de texto
+                      controller: _estadoSaludController, // esto tu quitassss
                       decoration: const InputDecoration(
                       hintText: 'Ingrese el estado de salud',
                       border: OutlineInputBorder(),
@@ -159,9 +159,9 @@ class _VistaAltasOperadoresState extends State<VistaAltasOperadores> {
               const SizedBox(height: 10),
               TextField(
                 controller: _contactoController, // Asignar el controlador al campo de texto
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Ingrese el contacto del chofer',
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 20),

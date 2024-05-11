@@ -6,6 +6,7 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/pdf.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:open_file/open_file.dart';
 
 class VistaReportes extends StatefulWidget {
   const VistaReportes({super.key});
@@ -31,78 +32,77 @@ class _VistaReportesState extends State<VistaReportes> {
     });
   }
 
-  Future<void> generarPDF() async {
-    final pdf = pw.Document();
-    pdf.addPage(
-      pw.Page(
-        build: (context) {
-          return pw.Table.fromTextArray(
-            border: pw.TableBorder.all(),
-            headerAlignment: pw.Alignment.center,
-            cellAlignment: pw.Alignment.center,
-            headerDecoration: const pw.BoxDecoration(color: PdfColors.grey300),
-            data: [
-              ['Tipo', 'Producto', 'Cantidad', 'Fecha', 'Usuario', 'Encargado'],
-              for (var reporte in reportes)
-                [
-                  reporte.tipo,
-                  reporte.nomproducto,
-                  reporte.Cantidad,
-                  reporte.Fecha,
-                  reporte.Usuario,
-                  reporte.Encargado
-                ],
-            ],
-          );
-        },
-      ),
-    );
+ Future<void> generarPDF() async {
+  final pdf = pw.Document();
+  pdf.addPage(
+    pw.Page(
+      build: (context) {
+        return pw.Table.fromTextArray(
+          border: pw.TableBorder.all(),
+          headerAlignment: pw.Alignment.center,
+          cellAlignment: pw.Alignment.center,
+          headerDecoration: const pw.BoxDecoration(color: PdfColors.grey300),
+          data: [
+            ['Tipo', 'Producto', 'Cantidad', 'Fecha', 'Usuario', 'Encargado'],
+            for (var reporte in reportes)
+              [
+                reporte.tipo,
+                reporte.nomproducto,
+                reporte.Cantidad,
+                reporte.Fecha,
+                reporte.Usuario,
+                reporte.Encargado
+              ],
+          ],
+        );
+      },
+    ),
+  );
 
-    final output = await getTemporaryDirectory();
-    final file = File("${output.path}/reportes.pdf");
-    try {
-      await file.writeAsBytes(await pdf.save());
-      // Open the PDF file
-      Process.start('open', [file.path]);
-      // ignore: use_build_context_synchronously
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('PDF generado'),
-            content: const Text('El PDF se ha generado correctamente.'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Cerrar'),
-              ),
-            ],
-          );
-        },
-      );
-    } catch (e) {
-      // ignore: use_build_context_synchronously
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Error'),
-            content: const Text('No se pudo generar el PDF.'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Cerrar'),
-              ),
-            ],
-          );
-        },
-      );
-    }
+  final output = await getTemporaryDirectory();
+  final file = File("${output.path}/reportes.pdf");
+  try {
+    await file.writeAsBytes(await pdf.save());
+    OpenFile.open(file.path);
+    // ignore: use_build_context_synchronously
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('PDF generado'),
+          content: const Text('El PDF se ha generado correctamente.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cerrar'),
+            ),
+          ],
+        );
+      },
+    );
+  } catch (e) {
+    // ignore: use_build_context_synchronously
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Error'),
+          content: const Text('No se pudo generar el PDF.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cerrar'),
+            ),
+          ],
+        );
+      },
+    );
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -161,6 +161,7 @@ class _VistaReportesState extends State<VistaReportes> {
                             Text('Nom. Producto: ${objeto.nomproducto}', style: const TextStyle(color: Colors.black, fontSize: 20)),
                             Text('Cantidad: ${objeto.Cantidad}', style: const TextStyle(color: Colors.black, fontSize: 20)),
                             Text('Fecha: ${objeto.Fecha}', style: const TextStyle(color: Colors.black, fontSize: 20)),
+                            Text('Hora: ${objeto.hora}', style: const TextStyle(color: Colors.black, fontSize: 20)),
                             Text('Usuario: ${objeto.Usuario}', style: const TextStyle(color: Colors.black, fontSize: 20)),
                             Text('Encargado: ${objeto.Encargado}', style: const TextStyle(color: Colors.black, fontSize: 20)),
                           ],
@@ -191,7 +192,7 @@ class _VistaReportesState extends State<VistaReportes> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Tipo: ${objeto.tipo}'),
-                  Text('Fecha: ${objeto.Fecha}'),
+                  Text('Fecha: ${objeto.Fecha} a las ${objeto.hora}'),
                 ],
               ),
             ),

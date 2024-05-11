@@ -23,7 +23,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
   }
 
   Future<List<ReporteVigilante>> _cargarhistorial() async {
-    List<ReporteVigilante> listaCamiones = await controlador.obtenerReporteVigilanteEntrada();
+    List<ReporteVigilante> listaCamiones = await controlador.obtenerReporteVigilanteSalida();
     return listaCamiones;
   }
 
@@ -125,7 +125,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     margin: const EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
                       title: Text(
-                        '${entry.Estado} - ${entry.hora}',
+                        '${entry.Estado} - ${entry.fecha} a las ${entry.hora}',
                         style: const TextStyle(color: Colors.white), // Cambiar el color del texto a blanco
                       ),
                       tileColor: tileColor, // el color de fondo

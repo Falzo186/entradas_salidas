@@ -1,5 +1,4 @@
 // Inicio.dart
-import 'package:entradas_salidas/Modelo/Usuario.dart';
 import 'package:entradas_salidas/Vista/Vista_AltaFacturas.dart';
 import 'package:entradas_salidas/Vista/Vista_ConsultaAlmacen.dart';
 import 'package:flutter/material.dart';
@@ -255,11 +254,11 @@ Widget build(BuildContext context) {
           left: 0,
           child: Container(
             decoration: const BoxDecoration(),
-            child: Image.asset(
-              'lib/assets/camion.png', // Ruta de la imagen
-              width: 250, // Ancho de la imagen
-              height: 200, // Alto de la imagen
-            ),
+            // child: Image.asset(
+            //   'lib/assets/camion.png', // Ruta de la imagen
+            //   width: 250, // Ancho de la imagen
+            //   height: 200, // Alto de la imagen
+            // ),
           ),
         ),
       ],

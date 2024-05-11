@@ -126,24 +126,24 @@ Future<bool> agregarObservacionVigilante(ObservacionVigilante observacionVigilan
     }
   }
 
-  Future<List<ReporteVigilante>> obtenerReporteVigilanteEntrada() async {
-    try {
-      QuerySnapshot querySnapshot = await ReporteVigilant
+  // Future<List<ReporteVigilante>> obtenerReporteVigilanteEntrada() async {
+  //   try {
+  //     QuerySnapshot querySnapshot = await ReporteVigilant
           
-          .orderBy('fecha', descending: false)
-          .get();
-      return querySnapshot.docs.map((doc) => ReporteVigilante.fromFirestore(doc)).toList();
-    } catch (e) {
-      print('Error al obtener los reportes de entrada: $e');
-      return [];
-    }
-  }
+  //         .orderBy('fecha', descending: false)
+  //         .get();
+  //     return querySnapshot.docs.map((doc) => ReporteVigilante.fromFirestore(doc)).toList();
+  //   } catch (e) {
+  //     print('Error al obtener los reportes de entrada: $e');
+  //     return [];
+  //   }
+  // }
 
   Future<List<ReporteVigilante>> obtenerReporteVigilanteSalida() async {
     try {
       QuerySnapshot querySnapshot = await ReporteVigilant
-          .where('tipo', isEqualTo: 'Salida')
-          .orderBy('fecha', descending: false)
+          .orderBy('fecha', descending: true)
+          .orderBy('hora', descending: true)
           .get();
 
       return querySnapshot.docs.map((doc) => ReporteVigilante.fromFirestore(doc)).toList();

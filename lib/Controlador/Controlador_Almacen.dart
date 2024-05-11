@@ -28,12 +28,14 @@ class ControladorAlmacen {
         'cantidad': cantidadExistente + producto.cantidad,
       });
       // Crear un registro de entrada/salida
-      String formattedDate = DateFormat('dd/MM/yy HH:mm:ss').format(DateTime.now());
+      String formattedDate = DateFormat('dd/MM/yy').format(DateTime.now());
+      String formattedTime = DateFormat('HH:mm:ss').format(DateTime.now());
       ReporteAlmacen registro = ReporteAlmacen(
         tipo: 'Entrada',
         nomproducto: producto.nombre,
         Cantidad: producto.cantidad.toString(),
         Fecha: formattedDate,
+        hora: formattedTime,
         Usuario: '-------------', // Aquí debes colocar el nombre del usuario actual
         Encargado: Encargado, // Aquí debes colocar el nombre del encargado
       );
@@ -43,12 +45,14 @@ class ControladorAlmacen {
       await _almacenCollection.doc(producto.folio).set(producto.toMap());
 
       // Crear un registro de entrada/salida
-      String formattedDate = DateFormat('dd/MM/yy HH:mm:ss').format(DateTime.now());
+      String formattedDate = DateFormat('dd/MM/yy').format(DateTime.now());
+      String formattedTime = DateFormat('HH:mm:ss').format(DateTime.now());
       ReporteAlmacen registro = ReporteAlmacen(
         tipo: 'Entrada',
         nomproducto: producto.nombre,
         Cantidad: producto.cantidad.toString(),
         Fecha: formattedDate,
+        hora: formattedTime,
         Usuario: '-------------', // Aquí debes colocar el nombre del usuario actual
         Encargado: Encargado, // Aquí debes colocar el nombre del encargado
       );
@@ -74,12 +78,14 @@ Future<bool> eliminarProducto(String folio, int cantidad, String usuario,String 
         });
       }
       // Crear un registro de entrada/salida
-      String formattedDate = DateFormat('dd/MM/yy HH:mm:ss').format(DateTime.now());
+      String formattedDate = DateFormat('dd/MM/yy').format(DateTime.now());
+      String formattedTime = DateFormat('HH:mm:ss').format(DateTime.now());
       ReporteAlmacen registro = ReporteAlmacen(
         tipo: 'Salida',
         nomproducto: (doc.data() as Map<String, dynamic>)?['nombre'] ?? '',
         Cantidad: cantidad.toString(),
         Fecha: formattedDate,
+        hora: formattedTime,
         Usuario: usuario, // Aquí debes colocar el nombre del usuario actual
         Encargado: Encargado, // Aquí debes colocar el nombre del encargado
       );
@@ -104,14 +110,16 @@ Future<bool> eliminarProducto(String folio, int cantidad, String usuario,String 
       return [];
     }
   }
- Future<List<ReporteAlmacen>> obtenerReportes() async {
-    try {
-      QuerySnapshot querySnapshot = await _reportesCollection.get();
-      return querySnapshot.docs.map((doc) => ReporteAlmacen.fromFirestore(doc.data() as Map<String, dynamic>)).toList();
-    } catch (e) {
-      print('Error al obtener los reportes: $e');
-      return [];
-    }
+Future<List<ReporteAlmacen>> obtenerReportes() async {
+  try {
+    QuerySnapshot querySnapshot = await _reportesCollection.orderBy('Fecha',descending: true)
+        .orderBy('hora', descending: true)
+        .get();
+    return querySnapshot.docs.map((doc) => ReporteAlmacen.fromFirestore(doc.data() as Map<String, dynamic>)).toList();
+  } catch (e) {
+    print('Error al obtener los reportes: $e');
+    return [];
   }
+}
 
 }

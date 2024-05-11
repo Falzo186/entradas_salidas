@@ -3,6 +3,7 @@ class ReporteAlmacen{
   String nomproducto;
   String Cantidad;
   String Fecha;
+  String hora;
   String Usuario;
   String Encargado;
   
@@ -12,6 +13,7 @@ class ReporteAlmacen{
     required this.nomproducto,
     required this.Cantidad,
     required this.Fecha,
+    required this.hora,
     required this.Usuario,
     required this.Encargado,
   });
@@ -22,6 +24,7 @@ class ReporteAlmacen{
       'nomproducto': nomproducto,
       'Cantidad': Cantidad,
       'Fecha': Fecha,
+      'hora': hora,
       'Usuario': Usuario,
       'Encargado': Encargado,
     };
@@ -33,6 +36,7 @@ class ReporteAlmacen{
       nomproducto: data['nomproducto'] ?? '',
       Cantidad: data['Cantidad'] ?? '',
       Fecha: data['Fecha'] ?? '',
+      hora: data['hora'] ?? '',
       Usuario: data['Usuario'] ?? '',
       Encargado: data['Encargado'] ?? '',
     );

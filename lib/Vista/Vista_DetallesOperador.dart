@@ -36,12 +36,39 @@ Future<List<dynamic>> cargarHistorialOperador() async {
 Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(
-      title: Text(
-        'Detalles de ${widget.operador.nombre}',
-        style: const TextStyle(color: Colors.white, fontSize: 30),
+        title: Text(
+          widget.operador.nombre,
+          style: const TextStyle(color: Colors.white, fontSize: 30),
+          overflow: TextOverflow.ellipsis,
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        actions: [
+        IconButton(
+          icon: const Icon(Icons.create_outlined , color: Colors.white, size: 30),
+          onPressed: () {
+          },
+        ),
+      ],
+        centerTitle: true,
+      toolbarHeight: 80,
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 15, 58, 47),
+              Color.fromARGB(255, 52, 174, 190),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
       ),
-      backgroundColor: Colors.transparent,
-    ),
+      ),
     body: ListView(
       children: [
         ListTile(
@@ -53,17 +80,17 @@ Widget build(BuildContext context) {
         ListTile(
           title: Text('Licencia de Conducir: ${widget.operador.licenciaConducir}'),
         ),
-        ListTile(
-          title: Text('Contacto: ${widget.operador.contacto}'),
+         ListTile(
+          title: Text('Estado: ${widget.operador.estadoSalud}'),
         ),
         ListTile(
-          title: Text('Estado de Salud: ${widget.operador.estadoSalud}'),
+          title: Text('Contacto: ${widget.operador.contacto}'),
         ),
         FutureBuilder<List<dynamic>>(
   future: cargarHistorialOperador(),
   builder: (context, snapshot) {
     if (snapshot.connectionState == ConnectionState.waiting) {
-      return CircularProgressIndicator();
+      return const CircularProgressIndicator();
     } else if (snapshot.hasError) {
       return Text('Error: ${snapshot.error}');
     } else {

@@ -251,17 +251,6 @@ Widget build(BuildContext context) {
                       );
                     },
                   ),
-                  //  const SizedBox(width: 20),
-                  // IconButton(
-                  //   icon: const Icon(Icons.note, size: 40),
-                  //   color: Colors.white,
-                  //   onPressed: () {
-                  //     Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(builder: (context) => const vistaObservaciones()),
-                  //     );
-                  //   },
-                  // ),
                 ],
               ),
             ),

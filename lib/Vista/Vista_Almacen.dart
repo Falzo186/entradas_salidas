@@ -121,7 +121,7 @@ Future<void> cargarProductos() async {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Actualizar()),
+                    MaterialPageRoute(builder: (context) => Actualizar(usuario: widget.usuario)),
                   );
                 },
               ),

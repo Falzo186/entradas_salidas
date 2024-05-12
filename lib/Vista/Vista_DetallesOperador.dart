@@ -104,7 +104,7 @@ Widget build(BuildContext context) {
       return Column(
         children: [
           const ListTile(
-            title: Text('Historial de Operador:'),
+            title: Text('-Historial de Operador:'),
           ),
           ListView.builder(
             shrinkWrap: true,
@@ -112,11 +112,39 @@ Widget build(BuildContext context) {
             itemBuilder: (context, index) {
               return ListTile(
                 title: Text('Folio: ${historialOperador[index].folio} - Fecha: ${historialOperador[index].fecha} ${historialOperador[index].hora}'),
+                onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text('Detalles del Historial'),
+                          content: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                             mainAxisSize: MainAxisSize.min, // Set mainAxisSize to min
+                            children: [
+                              Text('Folio: ${historialOperador[index].folio}'),
+                              Text('Fecha: ${historialOperador[index].fecha} ${historialOperador[index].hora}'),
+                              Text('Tipo: ${historialOperador[index].tipo}'),
+                              Text('Matricula del Camion: ${historialOperador[index].matriculaCamion}')
+                            ],
+                          ),
+                          actions: [
+                            TextButton(
+                              child: const Text('Cerrar'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                },
               );
             },
           ),
           const ListTile(
-            title: Text('Registro de Infracciones:'),
+            title: Text('-Registro de Infracciones:'),
           ),
           ListView.builder(
             shrinkWrap: true,
@@ -124,6 +152,33 @@ Widget build(BuildContext context) {
             itemBuilder: (context, index) {
               return ListTile(
                 title: Text('Infracción: ${registroInfracciones[index].Infraccion}'),
+                onTap: () {
+                    showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                      title: const Text('Detalles de la Infracción'),
+                      content: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min, // Set mainAxisSize to min
+                        children: [
+                        Text('Infracción: ${registroInfracciones[index].Infraccion}'),
+                        Text('Fecha: ${registroInfracciones[index].fecha}'),
+                        Text('Encargado: ${registroInfracciones[index].encargado}'),
+                        ],
+                      ),
+                      actions: [
+                        TextButton(
+                        child: const Text('Cerrar'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        ),
+                      ],
+                      );
+                    },
+                    );
+                },
               );
             },
           ),

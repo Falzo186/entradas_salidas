@@ -1,14 +1,17 @@
+
 import 'package:entradas_salidas/Controlador/Controlador_camiones.dart';
+import 'package:entradas_salidas/Modelo/AgendaReturn.dart';
 import 'package:entradas_salidas/Modelo/Camion.dart';
 import 'package:entradas_salidas/Vista/HistoryScreen.dart';
 import 'package:entradas_salidas/Vista/Vista_Agenda.dart';
 import 'package:entradas_salidas/Vista/Vista_Camion.dart';
 import 'package:entradas_salidas/Vista/Vista_Operador.dart';
 import 'package:flutter/material.dart';
-class MenuVigilante extends StatefulWidget {
-  final  String usuario;
-  const MenuVigilante({Key? key, required this.usuario}) : super(key: key);
+import '../Controlador/Controlador_VistaMenuVigilante.dart';
 
+class MenuVigilante extends StatefulWidget {
+  final String usuario;
+  const MenuVigilante({Key? key, required this.usuario}) : super(key: key);
 
   @override
   State<MenuVigilante> createState() => _MenuVigilanteState();
@@ -16,102 +19,149 @@ class MenuVigilante extends StatefulWidget {
 
 class _MenuVigilanteState extends State<MenuVigilante> {
   ControladorCamiones controladorCamiones = ControladorCamiones();
+  controladorVisual controlador = controladorVisual();
   List<Camion> camiones = [];
+  Agenda2? proximaAgenda;
 
   @override
- void initState() {
-  super.initState();
-  _cargarCamiones();
-}
+  void initState() {
+    super.initState();
+    _cargarCamiones();
+  }
 
-Future<void> _cargarCamiones() async {
-  List<Camion> listaCamiones = await controladorCamiones.getCamionesDeBD();
-  setState(() {
-    camiones = listaCamiones;
-  });
-}
+  Future<void> _cargarCamiones() async {
+    List<Camion> listaCamiones = await controladorCamiones.getCamionesDeBD();
+    proximaAgenda = await controlador.obtenerProximaAgenda();
+    setState(() {
+      camiones = listaCamiones;
+    });
+  }
 
   @override
-Widget build(BuildContext context) {
-  return Theme(
-    data: Theme.of(context).copyWith(
-      appBarTheme: const AppBarTheme(
-        elevation: 0,
+  Widget build(BuildContext context) {
+    return Theme(
+      data: Theme.of(context).copyWith(
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+        ),
+        iconTheme: const IconThemeData(
+          color: Color.fromARGB(255, 243, 238, 238),
+        ),
       ),
-      iconTheme: const IconThemeData(
-        color: Color.fromARGB(255, 243, 238, 238),
-      ),
-    ),
-    child: Scaffold(
-      backgroundColor: const Color.fromARGB(255, 243, 238, 238),
-      body: Stack(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.40,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color.fromARGB(255, 15, 58, 47),
-                  Color.fromARGB(255, 52, 174, 190),
+      child: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 243, 238, 238),
+        body: Stack(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.40,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Color.fromARGB(255, 15, 58, 47),
+                    Color.fromARGB(255, 52, 174, 190),
+                  ],
+                ),
+              ),
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        bottom: 155,
+                        left: 150,
+                      ),
+                      child: Text(
+                        'Menú\n                Vigilante',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Align(
-                alignment: Alignment.bottomLeft,
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.80,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(90),
+                  ),
+                ),
                 child: Padding(
-                  padding: EdgeInsets.only(
-                    bottom: 155,
-                    left: 150,
+                  padding: const EdgeInsets.only(
+                    top: 40,
+                    left: 40.0,
+                    right: 40.0,
                   ),
-                  child: Text(
-                    'Menú\n                Vigilante',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                    ),
-                  ),
-                ),
-              ),
-              ],
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.80,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(90),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 40,
-                  left: 40.0,
-                  right: 40.0,
-                ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 350,
-                        height: 180,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 33, 137, 141),
-                          borderRadius: BorderRadius.circular(20),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 350,
+                          height: 180,
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 33, 137, 141),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  'Próxima Agenda:',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                RichText(
+  text: TextSpan(
+    style: const TextStyle(
+      color: Colors.white,
+      fontSize: 16,
+    ),
+    children: [
+      TextSpan(
+        text: proximaAgenda != null ? 'Folio: ${proximaAgenda!.folio}' : 'No hay agenda',
+      ),
+      const TextSpan(text: '                 '), // Espacio entre Folio y Hora
+      TextSpan(
+        text: proximaAgenda != null ? 'Hora: ${proximaAgenda!.hora}' : '',
+      ),
+      const TextSpan(text: '\n'), // Nueva línea
+      TextSpan(
+        text: proximaAgenda != null ? 'Tipo: ${proximaAgenda!.tipo}' : '',
+      ),
+      const TextSpan(text: '                   '), // Espacio entre Tipo y Matrícula
+      TextSpan(
+        text: proximaAgenda != null ? 'Matrícula: ${proximaAgenda!.matriculaCamion}' : '',
+      ),
+      const TextSpan(text: '\n'), // Nueva línea
+      TextSpan(
+        text: proximaAgenda != null ? 'Operador: ${proximaAgenda!.nombreOperador}' : '',
+      ),
+    ],
+  ),
+),
+
+                              ],
+                            ),
+                          ),
                         ),
-                        child: const Center(
-                          child: Text(''),
-                        ),
-                      ),
+
                       Padding(
                         padding: EdgeInsets.only(
                             top: MediaQuery.of(context).size.width * 0.07),
@@ -144,6 +194,10 @@ Widget build(BuildContext context) {
                                   ),
                                 ),
                               ],
+
+
+
+                              
                             ),
                             const SizedBox(height: 35),
                             Container(
@@ -281,11 +335,11 @@ Widget build(BuildContext context) {
             left: 0,
             child: Container(
               decoration: const BoxDecoration(),
-              child: Image.asset(
-                'lib/assets/camion.png',
-                width: 250,
-                height: 200,
-              ),
+              // child: Image.asset(
+              //   'lib/assets/camion.png',
+              //   width: 250,
+              //   height: 200,
+              // ),
             ),
           ),
         ],

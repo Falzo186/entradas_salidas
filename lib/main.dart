@@ -74,12 +74,12 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-          'lib/assets/camion.png', 
-          width: 300,
-          height: 300,
-          color: Colors.white, 
-              ),
+          //     Image.asset(
+          // 'lib/assets/camion.png', 
+          // width: 300,
+          // height: 300,
+          // color: Colors.white, 
+          //     ),
               const SizedBox(
           height: 20,
               ),
@@ -118,12 +118,12 @@ class _AnimatedLogoState extends State
       builder: (__, _) {
         return Transform.scale(
           scale: _controller.value * 0.5 + 1.0, 
-          child: Image.asset(
-            'lib/assets/camion.png', 
-            width: 300,
-            height: 300,
-            color: Colors.white,
-          ),
+          // child: Image.asset(
+          //   'lib/assets/camion.png', 
+          //   width: 300,
+          //   height: 300,
+          //   color: Colors.white,
+          // ),
         );
       },
     );
@@ -172,15 +172,15 @@ class _LoginPageState extends State<LoginPage> {
             ),
             child: Stack(
               children: [
-                Positioned(
-                  top: 40,
-                  width: MediaQuery.of(context).size.width,
-                  child: Image.asset(
-                    'lib/assets/camion.png',
-                    width: 90,
-                    color: Colors.white,
-                  ),
-                ),
+                // Positioned(
+                //   top: 40,
+                //   width: MediaQuery.of(context).size.width,
+                //   child: Image.asset(
+                //     'lib/assets/camion.png',
+                //     width: 90,
+                //     color: Colors.white,
+                //   ),
+                // ),
               ],
             ),
           ),

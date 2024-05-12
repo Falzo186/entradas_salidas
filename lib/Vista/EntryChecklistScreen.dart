@@ -32,8 +32,33 @@ class _EntryChecklistScreenState extends State<EntryChecklistScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ENTRADA CHECKLIST'),
+        title: const Text(
+          'Entrada Checklist',
+          style: TextStyle(
+            color: Color.fromARGB(255, 255, 253, 253),
+            fontSize: 25,
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         centerTitle: true,
+        toolbarHeight: 80,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 15, 58, 47),
+                Color.fromARGB(255, 52, 174, 190),
+              ],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -140,7 +165,7 @@ class _EntryChecklistScreenState extends State<EntryChecklistScreen> {
               TextField(
                 controller: observacionesController,
                 decoration: const InputDecoration(
-                  labelText: 'Observaciones',
+                  labelText: 'Ingresa observaciones',
                   border: OutlineInputBorder(),
                 ),
                 maxLines: 3,
@@ -238,12 +263,13 @@ class _EntryChecklistScreenState extends State<EntryChecklistScreen> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero, // Bordes rectangulares
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.black,
+                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                   ),
-                ),
                 child: const Text('Aceptar Entrada'),
               ),
+              const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () async {
                   if (neumaticosRevisados &&
@@ -334,10 +360,10 @@ class _EntryChecklistScreenState extends State<EntryChecklistScreen> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero, // Bordes rectangulares
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.black,
+                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                   ),
-                ),
                 child: const Text('Negar Entrada'),
               ),
               if (cadena.isNotEmpty)

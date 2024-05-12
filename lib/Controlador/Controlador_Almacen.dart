@@ -9,6 +9,40 @@ class ControladorAlmacen {
       FirebaseFirestore.instance.collection('Almacen');
       final CollectionReference _reportesCollection = 
       FirebaseFirestore.instance.collection('ReportesAlmacen');
+   
+   Future<bool> modificarProducto(String folio,String nombre,String medicion,String marca,String Encargado) async {
+   
+    try {
+      DocumentSnapshot doc = await _almacenCollection.doc(folio).get();
+      if (doc.exists) {
+        await _almacenCollection.doc(folio).update({
+          'nombre': nombre,
+          'medicion': medicion,
+          'marca': marca,
+        });
+        // Crear un registro de entrada/salida
+        String formattedDate = DateFormat('dd/MM/yy').format(DateTime.now());
+        String formattedTime = DateFormat('HH:mm:ss').format(DateTime.now());
+        ReporteAlmacen registro = ReporteAlmacen(
+          tipo: 'Modificacion',
+          nomproducto: nombre,
+          Cantidad: '0',
+          Fecha: formattedDate,
+          hora: formattedTime,
+          Usuario: '-------------', // Aquí debes colocar el nombre del usuario actual
+          Encargado: Encargado, // Aquí debes colocar el nombre del encargado
+        );
+        await agregarRegistro(registro);
+        return true;
+      }
+    } catch (e) {
+      print('Error al modificar el producto: $e');
+    }
+    return false;
+
+   }
+   
+
 
 
   Future<void> agregarRegistro(ReporteAlmacen registro) async {

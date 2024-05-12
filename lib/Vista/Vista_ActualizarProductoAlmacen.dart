@@ -1,7 +1,27 @@
+import 'package:entradas_salidas/Controlador/Controlador_Almacen.dart';
 import 'package:flutter/material.dart';
 
-class Actualizar extends StatelessWidget {
-  const Actualizar({super.key});
+class Actualizar extends StatefulWidget {
+ final  String usuario;
+  const Actualizar({super.key, required this.usuario});
+
+  @override
+  State<Actualizar> createState() => _ActualizarState();
+}
+
+class _ActualizarState extends State<Actualizar> {
+  ControladorAlmacen controlador = ControladorAlmacen();
+  
+  TextEditingController folioController = TextEditingController();
+  TextEditingController nombreController = TextEditingController();
+  TextEditingController marcaController = TextEditingController();
+  TextEditingController medicionController = TextEditingController();
+  clearTextInput() {
+    folioController.clear();
+    nombreController.clear();
+    marcaController.clear();
+    medicionController.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,19 +36,19 @@ class Actualizar extends StatelessWidget {
           },
         ),
         centerTitle: true,
-      toolbarHeight: 80,
-      flexibleSpace: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(255, 15, 58, 47),
-              Color.fromARGB(255, 52, 174, 190),
-            ],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
+        toolbarHeight: 80,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 15, 58, 47),
+                Color.fromARGB(255, 52, 174, 190),
+              ],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
           ),
         ),
-      ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -42,8 +62,9 @@ class Actualizar extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: folioController,
+                decoration: const InputDecoration(
                   labelText: 'Folio',
                   border: OutlineInputBorder(),
                 ),
@@ -54,32 +75,23 @@ class Actualizar extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: nombreController,
+                decoration: const InputDecoration(
                   labelText: 'Nombre',
                   border: OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(height: 16),
-              const Text(
-                'Cantidad',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Cantidad',
-                  border: OutlineInputBorder(),
-                ),
-              ),
+              
               const SizedBox(height: 16),
               const Text(
                 'Marca',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: marcaController,
+                decoration: const InputDecoration(
                   labelText: 'Marca',
                   border: OutlineInputBorder(),
                 ),
@@ -90,64 +102,44 @@ class Actualizar extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: medicionController,
+                decoration: const InputDecoration(
                   labelText: 'Medición',
                   border: OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(height: 30),
-              Center(
-  child: Align(
-    alignment: Alignment.centerRight,
-    child: DropdownButton<String>(
-      value: 'Selecciona un campo',
-      icon: const Icon(Icons.arrow_drop_down),
-      iconSize: 24,
-      elevation: 16,
-      style: const TextStyle(color: Colors.black),
-      underline: Container(
-        height: 2,
-        color: Colors.black,
-      ),
-      onChanged: (String? newValue) {
-        // Lógica para cambiar el valor seleccionado
-      },
-      items: <String>[
-        'Selecciona un campo',
-        'Folio',
-        'Nombre',
-        'Cantidad',
-        'Marca',
-        'Medición'
-      ].map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(
-            value,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-          ),
-        );
-      }).toList(),
-    ),
-  ),
-),
               const SizedBox(height: 40),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   // Lógica para actualizar
+                  if(await controlador.modificarProducto( folioController.text, nombreController.text,  medicionController.text,marcaController.text, widget.usuario)){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Producto actualizado correctamente'),
+                        backgroundColor: Colors.green,
+                      ),
+                    );
+                    clearTextInput();
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Error al actualizar el producto'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white, 
-                backgroundColor: Colors.black,
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                  foregroundColor: Colors.white, 
+                  backgroundColor: Colors.black,
+                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
                 ),
                 child: const Text(
                   'Actualizar',
                   style: TextStyle(
                     fontSize: 15),
-                    ),
+                ),
               ),
             ],
           ),

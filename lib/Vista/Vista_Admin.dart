@@ -176,19 +176,24 @@ class _VistaAdminState extends State<VistaAdmin> {
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
+                              Expanded(
+                              child: Row(
                                 children: [
-                                  Icon(
-                                    Icons.calendar_today,
-                                    color: Colors.black,
-                                    size: 30,
+                                Icon(
+                                  Icons.calendar_today,
+                                  color: Colors.black,
+                                  size: 30,
+                                ),
+                                SizedBox(width: 20),
+                                Flexible(
+                                  child: Text(
+                                  'Gestionar Agenda',
+                                  style: TextStyle(color: Colors.black, fontSize: 20),
+                                  overflow: TextOverflow.visible,
                                   ),
-                                  SizedBox(width: 20),
-                                  Text(
-                                    'Gestionar Agenda',
-                                    style: TextStyle(color: Colors.black, fontSize: 20),
-                                  ),
+                                ),
                                 ],
+                              ),
                               ),
                               Icon(Icons.arrow_forward_ios, color: Colors.black, size: 25),
                             ],
@@ -219,19 +224,24 @@ class _VistaAdminState extends State<VistaAdmin> {
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
+                              Expanded(
+                              child: Row(
                                 children: [
-                                  Icon(
-                                    Icons.supervised_user_circle_rounded,
-                                    color: Colors.black,
-                                    size: 30,
+                                Icon(
+                                  Icons.supervised_user_circle_rounded,
+                                  color: Colors.black,
+                                  size: 30,
+                                ),
+                                SizedBox(width: 20),
+                                Flexible(
+                                  child: Text(
+                                  'Gestionar Usuarios',
+                                  style: TextStyle(color: Colors.black, fontSize: 20),
+                                  overflow: TextOverflow.visible,
                                   ),
-                                  SizedBox(width: 20),
-                                  Text(
-                                    'Gestionar Usuarios',
-                                    style: TextStyle(color: Colors.black, fontSize: 20),
-                                  ),
+                                ),
                                 ],
+                              ),
                               ),
                               Icon(Icons.arrow_forward_ios, color: Colors.black, size: 25),
                             ],

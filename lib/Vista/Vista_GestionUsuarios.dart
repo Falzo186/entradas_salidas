@@ -71,11 +71,13 @@ class _VistaGestionUsuarioState extends State<VistaGestionUsuario> {
                               columns: const [
                                 DataColumn(label: Text('Nombre')),
                                 DataColumn(label: Text('Tipo de Usuario')),
+                                DataColumn(label: Text('Contraseña')),
                               ],
                               rows: [
                                 DataRow(cells: [
                                   DataCell(Text(usuario.nombre)),
                                   DataCell(Text(usuario.tipoUsuario)),
+                                  DataCell(Text(usuario.contrasena)),
                                 ]),
                               ],
                             ),

@@ -5,7 +5,15 @@ import 'package:entradas_salidas/Modelo/InfraccionOperador.dart';
 class ControladorHistorialOperador{
     
     final CollectionReference Infracciones =FirebaseFirestore.instance.collection('RegistroInFraccionesOperador');
-  final CollectionReference Historial = FirebaseFirestore.instance.collection('HistorialOperador');   
+  final CollectionReference Historial = FirebaseFirestore.instance.collection('HistorialOperador'); 
+
+    Future<void> agregarInfraccionOperador(InfraccionOperador infraccionOperador) async {
+    try {
+      await Infracciones.add(infraccionOperador.toMap());
+    } catch (e) {
+      print('Error al agregar la infracción: $e');
+    }
+    }
  
 Future<List<InfraccionOperador>> getRegistroInFraccionesOperador(String idChofer) async {
   List<InfraccionOperador> registroInfracciones = [];
@@ -16,6 +24,8 @@ Future<List<InfraccionOperador>> getRegistroInFraccionesOperador(String idChofer
     registroInfracciones.add(InfraccionOperador(
       idChofer: doc['idChofer'],
       Infraccion: doc['Infraccion'],
+      fecha: doc['fecha'],
+      encargado: doc['encargado'],
     ));
   }
   return registroInfracciones;

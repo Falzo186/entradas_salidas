@@ -1,5 +1,3 @@
-// Inicio.dart
-import 'package:entradas_salidas/Vista/Vista_AltaFacturas.dart';
 import 'package:entradas_salidas/Vista/Vista_ConsultaAlmacen.dart';
 import 'package:flutter/material.dart';
 import 'Vista_Almacen.dart'; 
@@ -118,7 +116,7 @@ Widget build(BuildContext context) {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) =>  AltaFactura()),
+                              MaterialPageRoute(builder: (context) => const VistaReportes()),
                             );
                           },
                           style: ElevatedButton.styleFrom(
@@ -131,13 +129,13 @@ Widget build(BuildContext context) {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
-                                Icons.request_quote_sharp,
+                                Icons.receipt_long,
                                 size: 70,
                                 color: Colors.black,
                               ),
                               SizedBox(height: 10),
                               Text(
-                                'Facturas',
+                                'Reportes',
                                 style: TextStyle(color: Colors.black, fontSize: 20),
                               ),
                             ],
@@ -188,39 +186,6 @@ Widget build(BuildContext context) {
     ),
   ),
 ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.43,
-                        height: MediaQuery.of(context).size.height * 0.27,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const VistaReportes()),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              side: const BorderSide(color: Colors.grey)),
-                          child: const Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.receipt_long,
-                                size: 70,
-                                color: Colors.black,
-                              ),
-                              SizedBox(height: 10),
-                              Text(
-                                'Reportes',
-                                style: TextStyle(color: Colors.black, fontSize: 20),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ],
@@ -254,11 +219,11 @@ Widget build(BuildContext context) {
           left: 0,
           child: Container(
             decoration: const BoxDecoration(),
-            // child: Image.asset(
-            //   'lib/assets/camion.png', // Ruta de la imagen
-            //   width: 250, // Ancho de la imagen
-            //   height: 200, // Alto de la imagen
-            // ),
+            child: Image.asset(
+              'lib/assets/camion.png', // Ruta de la imagen
+              width: 250, // Ancho de la imagen
+              height: 200, // Alto de la imagen
+            ),
           ),
         ),
       ],

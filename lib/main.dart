@@ -65,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 79, 212, 184),
+              Color.fromARGB(255, 15, 58, 47),
               Color.fromARGB(255, 70, 209, 191),
             ],
           ),
@@ -74,12 +74,12 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-          //     Image.asset(
-          // 'assets/camion.png', 
-          // width: 300,
-          // height: 300,
-          // color: Colors.white, 
-          //     ),
+              Image.asset(
+          'lib/assets/camion.png', 
+          width: 300,
+          height: 300,
+          color: Colors.white, 
+              ),
               const SizedBox(
           height: 20,
               ),
@@ -118,12 +118,12 @@ class _AnimatedLogoState extends State
       builder: (__, _) {
         return Transform.scale(
           scale: _controller.value * 0.5 + 1.0, 
-          // child: Image.asset(
-          //   'assets/camion.png', 
-          //   width: 300,
-          //   height: 300,
-          //   color: Colors.white,
-          // ),
+          child: Image.asset(
+            'lib/assets/camion.png', 
+            width: 300,
+            height: 300,
+            color: Colors.white,
+          ),
         );
       },
     );
@@ -142,8 +142,8 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   ControladorLogin controlador = ControladorLogin();
   ControladorCamiones controladorCamiones = ControladorCamiones();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
 
   @override
@@ -172,15 +172,15 @@ class _LoginPageState extends State<LoginPage> {
             ),
             child: Stack(
               children: [
-                // Positioned(
-                //   top: 40,
-                //   width: MediaQuery.of(context).size.width,
-                //   // child: Image.asset(
-                //   //   'assets/camion.png',
-                //   //   width: 90,
-                //   //   color: Colors.white,
-                //   // ),
-                // ),
+                Positioned(
+                  top: 40,
+                  width: MediaQuery.of(context).size.width,
+                  child: Image.asset(
+                    'lib/assets/camion.png',
+                    width: 90,
+                    color: Colors.white,
+                  ),
+                ),
               ],
             ),
           ),
@@ -199,68 +199,13 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          child: ElevatedButton(
-                            onPressed: () async {
-                               String usuario = _emailController.text;
-                              if (await controlador.loginAndGetTipoUsuario(
-                                      _emailController.text,
-                                      _passwordController.text) ==
-                                  1) {
-                                Navigator.of(context, rootNavigator: true).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => Inicio( usuario: usuario),
-                                  ),
-                                );
-                                 dispose();
-                              } else if (await controlador.loginAndGetTipoUsuario(
-                                      _emailController.text,
-                                      _passwordController.text) ==
-                                  2) {
-                                Navigator.of(context, rootNavigator: true).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => MenuVigilante(usuario: usuario),
-                                  ),
-                                );
-                                 dispose();
-                              } else if (await controlador.loginAndGetTipoUsuario(
-                                      _emailController.text,
-                                      _passwordController.text) ==
-                                  3) {
-                                Navigator.of(context, rootNavigator: true).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => VistaAdmin(usuario: usuario),
-                                  ),
-                                );
-                                 dispose();
-                              }
-                             
-                            },
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Colors.transparent),
-                              elevation: MaterialStateProperty.all(0),
-                            ),
-                            child: const Text(
-                              'INGRESAR',
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 70, 209, 191),
-                                  fontSize: 20),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                     const SizedBox(height: 20),
                     Form(
                       key: _formKey,
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const SizedBox(height: 40),
+                          const SizedBox(height: 0),
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
                             width: MediaQuery.of(context).size.width * 0.7,
@@ -377,9 +322,68 @@ class _LoginPageState extends State<LoginPage> {
                               ],
                             ),
                           ),
-                          const SizedBox(height: 25.0),
+                          const SizedBox(height: 60.0),
                         ],
                       ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          child: ElevatedButton(
+                            onPressed: () async {
+                               String usuario = _emailController.text;
+                              if (await controlador.loginAndGetTipoUsuario(
+                                      _emailController.text,
+                                      _passwordController.text) ==
+                                  1) {
+                                Navigator.of(context, rootNavigator: true).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => Inicio( usuario: usuario),
+                                  ),
+                                );
+                                 dispose();
+                              } else if (await controlador.loginAndGetTipoUsuario(
+                                      _emailController.text,
+                                      _passwordController.text) ==
+                                  2) {
+                                Navigator.of(context, rootNavigator: true).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => MenuVigilante(usuario: usuario),
+                                  ),
+                                );
+                                 dispose();
+                              } else if (await controlador.loginAndGetTipoUsuario(
+                                      _emailController.text,
+                                      _passwordController.text) ==
+                                  3) {
+                                Navigator.of(context, rootNavigator: true).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => VistaAdmin(usuario: usuario),
+                                  ),
+                                );
+                                 dispose();
+                              }
+                             
+                            },
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(const Color.fromARGB(255, 70, 209, 191)),
+                              elevation: MaterialStateProperty.all(0),
+                              
+                            ),
+                            child: const Padding(
+                              padding: EdgeInsets.all(10.0), 
+                              child: Text(
+                                'INGRESAR',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -390,6 +394,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
-
 }

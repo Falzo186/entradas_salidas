@@ -6,9 +6,8 @@ import '../Modelo/Operador.dart';
 
 
 class VistaOperador extends StatefulWidget {
-  
-
-   const VistaOperador({super.key});
+  final String usuario;
+   const VistaOperador({super.key, required this.usuario});
 
   @override
   State<VistaOperador> createState() => _VistaOperadorState();
@@ -79,7 +78,7 @@ Future<void> cargarOperadores() async {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => DetalleOperador(operador: _operadores[index]),
+                builder: (context) => DetalleOperador(operador: _operadores[index], usuario: widget.usuario),
               ),
             );
           },

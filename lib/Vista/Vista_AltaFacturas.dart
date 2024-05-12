@@ -1,8 +1,9 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class AltaFactura extends StatefulWidget {
   @override
@@ -27,11 +28,11 @@ class _AltaFacturaState extends State<AltaFactura> {
       });
 
       try {
-        Reference ref = FirebaseStorage.instance
+        Reference ref = firebase_storage.FirebaseStorage.instance
             .ref()
-            .child('facturas/${DateTime.now().millisecondsSinceEpoch}.pdf');
+            .child('entradas-4350a.appspot.com/${DateTime.now().millisecondsSinceEpoch}.pdf');
 
-        UploadTask uploadTask = ref.putFile(_pdfFile!);
+        firebase_storage.UploadTask uploadTask = ref.putFile(_pdfFile!);
         await uploadTask.whenComplete(() => null);
 
         String pdfUrl = await ref.getDownloadURL();

@@ -3,12 +3,14 @@ import 'package:entradas_salidas/Controlador/Controlador_HistorialOperador.dart'
 import 'package:entradas_salidas/Controlador/Controlador_Operador.dart';
 import 'package:entradas_salidas/Modelo/HistorialOperador.dart';
 import 'package:entradas_salidas/Modelo/InfraccionOperador.dart';
+import 'package:entradas_salidas/Vista/Vista_AgregarInfraccionOperador.dart';
 import 'package:flutter/material.dart';
 import '../Modelo/Operador.dart';
 class DetalleOperador extends StatefulWidget {
   final Operador operador;
+  final String usuario;
 
-  const DetalleOperador({required this.operador, Key? key}) : super(key: key);
+  const DetalleOperador({required this.operador, Key? key, required this.usuario}) : super(key: key);
 
   @override
   State<DetalleOperador> createState() => _DetalleOperadorState();
@@ -51,6 +53,9 @@ Widget build(BuildContext context) {
         IconButton(
           icon: const Icon(Icons.create_outlined , color: Colors.white, size: 30),
           onPressed: () {
+             Navigator.of(context, rootNavigator: true).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => VistaAgregarInfraccionOperador( operador: widget.operador,usuario: widget.usuario,)));
           },
         ),
       ],

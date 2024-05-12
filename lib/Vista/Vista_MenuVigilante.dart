@@ -225,7 +225,7 @@ Widget build(BuildContext context) {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) =>  VistaOperador()),
+                        MaterialPageRoute(builder: (context) =>  VistaOperador(usuario: widget.usuario,)),
                       );
                     },
                   ),
